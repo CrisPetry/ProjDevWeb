@@ -7,6 +7,7 @@
     <title>Página de Login</title>
 
     <!-- Links de Estilo -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link
       href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
       rel="stylesheet"
@@ -17,6 +18,13 @@
     <!-- Scripts -->
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <style>
+      body > div.main > div > div > form > a{
+        text-decoration: none;
+        color: white;
+      }
+    </style>
   </head>
   <body>
     <div class="sidenav">
@@ -47,7 +55,12 @@
                 required
               />
             </div>
-            <button type="submit" class="btn btn-black">Entrar</button>
+            <button type="submit" class="btn btn-black">
+              <i class="fa-spinner fa" aria-hidden="true"></i>
+              Entrar</button>
+            <a href="../index.php" class="btn btn-black">
+               <i class="fa-arrow-left fa" aria-hidden="true"></i>
+              Voltar</a>
           </form>
         </div>
       </div>
