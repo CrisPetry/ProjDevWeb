@@ -15,35 +15,43 @@
     <link rel="stylesheet" href="../Include/estilodash.css">
 
     <style>
-    .btn-black {
-        background-color: #000 !important;
-        color: #fff;
-    }
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
 
-    .btn-black:hover {
-        text-decoration: none;
-        color: white;
-    }
+        .btn-black {
+            background-color: #000 !important;
+            color: #fff;
+        }
 
-    body>section>div>div>div:nth-child(4)>a {
-        text-decoration: none;
-        color: black;
-    }
+        .btn-black:hover {
+            text-decoration: none;
+            color: white;
+        }
 
-    body>section>div>div>div:nth-child(3)>a {
-        text-decoration: none;
-        color: black;
-    }
+        body>section>div>div>div:nth-child(4)>a {
+            text-decoration: none;
+            color: black;
+        }
 
-    body>section>div>div>div:nth-child(2)>a {
-        text-decoration: none;
-        color: black;
-    }
+        body>section>div>div>div:nth-child(3)>a {
+            text-decoration: none;
+            color: black;
+        }
 
-    body>section>div>div>div:nth-child(1)>a {
-        text-decoration: none;
-        color: black;
-    }
+        body>section>div>div>div:nth-child(2)>a {
+            text-decoration: none;
+            color: black;
+        }
+
+        body>section>div>div>div:nth-child(1)>a {
+            text-decoration: none;
+            color: black;
+        }
     </style>
 </head>
 

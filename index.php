@@ -42,6 +42,10 @@
       text-decoration: none;
       color: white;
     }
+
+    .btn{
+      white-space: nowrap;
+    }
     
   </style>
 </head>

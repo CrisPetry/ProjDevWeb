@@ -8,6 +8,10 @@
     font-size: 2.25rem;
 }
 
+body{
+    margin: auto;
+}
+
 .blog-header-logo:hover {
     text-decoration: none;
 }
