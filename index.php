@@ -103,8 +103,8 @@
             </p>
           </div>
           <div class="col-auto d-none d-lg-block">
-            <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-              <rect width="100%" height="100%" id="vendas" fill="#55595c" />
+            <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice">
+            <image xlink:href="Include/estoque.png" width="100%" height="100%"/>
             </svg>
           </div>
         </div>
@@ -131,8 +131,8 @@
             </p>
           </div>
           <div class="col-auto d-none d-lg-block">
-            <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-              <rect width="100%" height="100%" fill="#55595c" />
+            <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid meet" focusable="false">
+            <image xlink:href="Include/venda.png" width="100%" height="100%"/>
             </svg>
           </div>
         </div>
