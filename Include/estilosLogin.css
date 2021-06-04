@@ -11,7 +11,7 @@ body {
 
 .sidenav {
     height: 100%;
-    background-color: #000;
+    background-color: lightblue;
     overflow-x: hidden;
     padding-top: 20px;
 }
@@ -61,12 +61,35 @@ body {
 .login-main-text{
     margin-top: 20%;
     padding: 60px;
-    color: #fff;
+    color: #000;
+}
+
+#user.form-control{
+    text-align: center;
+    border-radius: 1rem;
+    border-color: #000;
+}
+
+.form-group>label:nth-child(1){
+    margin-top: 1.5rem;
+}
+
+
+.form-group{
+    font-weight: 700;
+}
+
+#pwd.form-control{
+    text-align: center;
+    border-radius: 1rem;
+    border-color: #000;
+    margin-bottom: 1.5rem;
 }
 
 .login-main-text h2{
     font-weight: 500;
-    font-size: 75px;
+    font-size: 3rem;
+    display: flex;
 }
 
 .btn-black{
