@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -56,14 +55,21 @@
         #warning {
             padding-bottom: 2rem;
         }
+
+        .navbar {
+            width: 100%;
+            display: flex;
+            background-color: lightblue !important;
+        }
     </style>
 </head>
 
 <body>
 
-    <nav class="navbar navbar-light bg-light justify-content-between" id="headir">
-        <img src="../Include/logo.png" alt="roupex" height="90" width="90">
-        </form>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand"><img src="../Include/logo.png" alt="roupex" height="60" width="60"></a>
+        </div>
     </nav>
 
 

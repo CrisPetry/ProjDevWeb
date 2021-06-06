@@ -7,19 +7,14 @@ body {
     width: 100%;
 }
 
-
-
 .sidenav {
     height: 100%;
     background-color: lightblue;
     overflow-x: hidden;
-    padding-top: 20px;
+
 }
 
 
-.main {
-    padding: 0px 10px;
-}
 
 @media screen and (max-height: 450px) {
     .sidenav {
@@ -59,18 +54,24 @@ body {
     }
 }
 
+#formInserir {
+    width: 67%;
+    margin: 0 auto;
+}
 
 .login-main-text {
-    font-family: "Sigmar one", cursive;
+    font-family: 'Sigmar One', cursive;
     margin-top: 20%;
     padding: 1rem;
     color: #000;
 }
 
+
 p {
+    margin: 0 auto;
+    padding-left: 4rem;
     font-family: 'Merienda One', cursive;
     font-weight: 600;
-    margin: auto 0;
 }
 
 #user.form-control {
@@ -79,13 +80,22 @@ p {
     border-color: #000;
 }
 
+label {
+    text-align: center;
+}
+
 .form-group>label:nth-child(1) {
     margin-top: 1.5rem;
 }
 
 
 .form-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-weight: 700;
+    flex-direction: column;
+    text-align: center;
 }
 
 #pwd.form-control {
@@ -101,8 +111,16 @@ p {
     display: flex;
 }
 
+conteiner-fluid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding-bottom: 1rem;
+}
+
 .btn-black {
     background-color: #000 !important;
+    margin-right: 0.15rem;
     color: #fff;
-    margin-bottom: 0.5rem;
 }

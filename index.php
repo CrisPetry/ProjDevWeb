@@ -26,6 +26,8 @@
         }
 
         .btn-black {
+            font-family: 'Merienda One', cursive;
+            font-size: medium;
             background-color: #000 !important;
             color: #fff;
         }
@@ -39,8 +41,6 @@
             white-space: nowrap;
             margin-right: 1rem;
         }
-
-        
     </style>
 </head>
 

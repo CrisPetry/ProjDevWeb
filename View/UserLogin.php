@@ -31,7 +31,7 @@
 </head>
 
 <body>
-  <form id="form1" style="text-align: center" name="form1" method="post" action="../View/login.php">
+  <form id="form1" style="text-align: center" name="idLogin" method="post" action="../View/login.php">
     <div class="sidenav">
       <div class="login-main-text">
         <h2>ROUPEX</h2>
@@ -56,6 +56,9 @@
             <a href="../index.php" class="btn btn-black">
               <i class="fa-arrow-left fa" aria-hidden="true"></i>
               Voltar</a>
+            <a href="../View/cadastro.php" class="btn btn-black">
+              <i class="fa-pencil fa" aria-hidden="true"></i>
+              Cadastrar</a>
           </form>
         </div>
       </div>

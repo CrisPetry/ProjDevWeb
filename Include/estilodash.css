@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merienda+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -37,6 +41,10 @@ body>section>div>div>div:nth-child(4) {
     order: 3;
 }
 
+span {
+    font-family: 'Merienda One', cursive;
+    color: #000;
+}
 
 html,
 body {
