@@ -14,7 +14,7 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<style>
+    <style>
     table {
         border-radius: 12rem !important;
     }
@@ -73,7 +73,7 @@
     .dropdown-content {
         display: none;
         position: absolute;
-        background-color: #f9f9f9;
+        background-color: #000;
         box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
         z-index: 1;
     }
@@ -112,6 +112,9 @@
                         <a href="../View/logout.php" class="btn btn-black">
                             <i class="fa-power-off fa" aria-hidden="true"></i>
                             Sair</a>
+                        <a href="../View/dashboard.php" class="btn btn-black">
+                            <i class="fa-arrow-left fa" aria-hidden="true"></i>
+                            Voltar</a>
                     </div>
                 </div>
             </form>

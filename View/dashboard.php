@@ -151,13 +151,13 @@
                     </a>
                 </div>
                 <div class="col-lg-6 mbr-col-md-10">
-                    <a href="cadastroUser.php">
+                    <a href="listarUsers.php">
                         <div class="wrap">
                             <div class="ico-wrap">
                                 <span class="mbr-iconfont fa-user-circle fa"></span>
                             </div>
                             <div class="text-wrap vcenter">
-                                <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"> <span>Produto Venda</span>
+                                <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"> <span>Usuários</span>
                                 </h2>
                             </div>
                         </div>

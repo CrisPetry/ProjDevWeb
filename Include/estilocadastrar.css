@@ -15,3 +15,9 @@
     text-decoration: none;
     color: #fff;
 }
+
+h3 {
+    font-size: large !important;
+    font-family: 'Merienda One', cursive !important;
+    padding-top: 2rem;
+}

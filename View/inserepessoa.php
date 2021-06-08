@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Pessoas</title>
+    <title>Inserir Pessoas</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../Include/estilocadastrar.css">
@@ -85,7 +85,7 @@
 
     <div class="conteiner">
         <div class="form-group">
-            <h3 style="text-align: center;">CADASTRAR</h3>
+            <h3 style="text-align: center;">CADASTRAR PESSOA</h3>
         </div>
 
         <form id="formInserir" name="formInserir" method="POST" action="inserepessoa.php">
@@ -93,35 +93,35 @@
             <div class="form-group">
                 <div class="   col-md-6 offset-md-3">
                     <label>NOME</label>
-                    <input type="text" name="nome" id="nome" class="form-control " required="">
+                    <input type="text" name="nome" id="nome" class="form-control " required>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-6 offset-md-3">
                     <label>CPF/CNPJ</label>
-                    <input type="text" name="numsoc" id="numsoc" class="form-control" required="">
+                    <input type="text" name="numsoc" id="numsoc" class="form-control" required>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-6 offset-md-3">
                     <label>ENDEREÇO</label>
-                    <input type="text" name="endereco" id="endereco" class="form-control" required="">
+                    <input type="text" name="endereco" id="endereco" class="form-control" required>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-6 offset-md-3">
                     <label>TELEFONE</label>
-                    <input type="text" name="telefone" id="telefone" class="form-control" required="">
+                    <input type="text" name="telefone" id="telefone" class="form-control" required>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-6 offset-md-3">
                     <label>CIDADE</label>
-                    <input type="text" name="cidade" id="cidade" class="form-control" required="">
+                    <input type="text" name="cidade" id="cidade" class="form-control" required>
                 </div>
             </div>
 
@@ -129,7 +129,7 @@
                 <div class="col-md-6 offset-md-3">
                     <input type="submit" value="Enviar" class="btn btn-primary" name="button" id="button">
                     <a href="../View/listapessoa.php">
-                        <input type="button" value="Voltar" class="btn btn-primary" name="voltar" id="voltar"></a>
+                        <input type="button" value="Voltar" class="btn btn-success" name="voltar" id="voltar"></a>
                 </div>
             </div>
     </div>
@@ -142,6 +142,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
         integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous">
     </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"
         integrity="sha512-d4KkQohk+HswGs6A1d6Gak6Bb9rMWtxjOa0IiY49Q3TeFd5xAzjWXDCBW9RS7m86FQ4RzM2BdHmdJnnKRYknxw=="
@@ -163,6 +164,33 @@
     } else {
         $("#numsoc").mask("99.999.999/9999-99");
     }
+    </script>
+
+    <script>
+    document.querySelector('#formInserir').addEventListener('submit', function(e) {
+        var form = this;
+
+        e.preventDefault();
+
+        swal({
+            title: "Salvar registro?",
+            icon: "warning",
+            buttons: [
+                'Não',
+                'Sim'
+            ],
+            dangerMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                swal({
+                    title: 'Pessoa Adicionado!',
+                    icon: 'success'
+                }).then(function() {
+                    form.submit();
+                });
+            }
+        });
+    });
     </script>
 
 </body>
