@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+.conteiner {
+    margin: auto 0;
+    width: 100%;
+
+}
+
+.btn-black {
+    color: #fff;
+    background-color: black;
+}
+
+.btn-black:hover {
+    text-decoration: none;
+    color: #fff;
+}

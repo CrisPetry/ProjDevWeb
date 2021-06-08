@@ -15,7 +15,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
-    <style>
+<style>
         .btn-black {
             font-family: 'Merienda One', cursive;
             background-color: #000 !important;
@@ -98,7 +98,6 @@
         </div>
     </nav>
 
-
     <?php
     include("../Include/SessaoValidate.php");
     include_once("../controller/UserCon.php");
@@ -124,7 +123,7 @@
                     </a>
                 </div>
                 <div class="col-lg-6 mbr-col-md-10">
-                    <a href="../Model/listapessoa.php">
+                    <a href="../View/listapessoa.php">
                         <div class="wrap">
                             <div class="ico-wrap">
                                 <span class="mbr-iconfont fa-users fa"></span>

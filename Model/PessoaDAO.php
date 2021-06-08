@@ -10,7 +10,8 @@ class PessoaDAO{
 
     public function Inserir($pessoa){
         try{
-            $stmt = $this->p->prepare("INSERT INTO pessoa (nome, numsoc, endereco, telefone, cidade) VALUES (?, ?, ?, ?, ?)");
+            $sql = "INSERT INTO pessoa (nome, numsoc, endereco, telefone, cidade) VALUES (?, ?, ?, ?, ?)";
+            $stmt = $this->p->prepare($sql);
 
             $this->p->beginTransaction();
             $stmt->bindValue(1, $pessoa->nome);
@@ -21,18 +22,22 @@ class PessoaDAO{
 
 
             $stmt->execute();
-            $stmt->p->commit();
 
+            $this->p->commit(); 
+            
             unset($this->p);
 
             return true;
-        } catch (PDOException $e) {
-            $this->erro = "ERRO: " . $e->getMessage();
-            return false;
+
         }
+         catch (PDOException $e) {
+            $this->erro = "ERRO: " . $e->getMessage();
+               return false;
+            }  
     }
 
-    public function Alterar($pessoa){
+
+    function Alterar($pessoa){
         try{
             $stmt = $this->p->prepare("UPDATE pessoa SET nome, numsoc, endereco, telefone, cidade) VALUES (?, ?, ?, ?, ?)");
             $this->p->beginTransaction();
@@ -41,6 +46,7 @@ class PessoaDAO{
             $stmt->bindValue(3, $pessoa->endereco);
             $stmt->bindValue(4, $pessoa->telefone);
             $stmt->bindValue(5, $pessoa->cidade);
+            $stmt->bindValue(6, $pessoa->id);
 
             $stmt->execute();
             $this->p->commit();
@@ -62,14 +68,14 @@ class PessoaDAO{
             $this->p->commit();
             unset($this->p);
             return true;
-        }
-        catch(PDOException $e){
+        } 
+        catch (PDOException $e) {
             $this->erro = "ERRO: " . $e->getMessage();
             return false;
-        }
+        }  
     }
 
-    public function Consultar($query=null){
+    function Consultar($query=null){
         try{
             $items = array();
 

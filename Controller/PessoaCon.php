@@ -41,8 +41,6 @@ class PessoaCon{
                 echo "<td style=\"text-align: left;\" width='3rem'>$telefone</td>";
                 if ($cidade)
                     echo "<td style=\"text-align: right;\">$cidade</td>";
-                echo "<td style=\"text-align: right;\"><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#pessoaModal'><i class='fa-plus fa' aria-hidden='true'></i></button>&nbsp;
-                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#pessoaModal' ><i class='fa-edit fa' aria-hidden='true'></i></button>&nbsp;<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#pessoaModal'><i class='fa-trash fa' aria-hidden='true'></i></button></td>";
                 echo "</tr>";
             }
         }
@@ -54,35 +52,34 @@ class PessoaCon{
     }
     public function controlaInsercao()
     {
-        if (isset($_POST["nome"]) && isset($_POST["numsoc"]) && isset($_POST["endereco"]) && isset($_POST["telefone"])
-            && isset($_POST["cidade"]) ) {
-            $erros = array();
-            $nome = $_POST["nome"];
-            $numsoc = $_POST["numsoc"];
-            $endereco = $_POST["endereco"];
-            $telefone = $_POST["telefone"];
-            $cidade = $_POST["cidade"];
+        if (isset($_POST["nome"]) && isset($_POST["numsoc"]) && isset($_POST["endereco"]) 
+        && isset($_POST["telefone"]) && isset($_POST["cidade"]) ) {
+            $erros      = array();
+            $nome       = $_POST["nome"];
+            $numsoc     = $_POST["numsoc"];
+            $endereco   = $_POST["endereco"];
+            $telefone   = $_POST["telefone"];
+            $cidade     = $_POST["cidade"];
 
             if (!PessoaValidate::testarNome($_POST["nome"]))
-                $erros[] = "Nome inválido";
+            $erros[] = "Nome inválido";
 
-            if (count($erros) == 0) {
-                $DAO  = new PessoaDAO();
-                $pessoa = new Pessoa();
-                $pessoa->nome = $nome;
-                $pessoa->numsoc = $numsoc;
-                $pessoa->endereco = $endereco;
-                $pessoa->telefone = $telefone;
-                $pessoa->cidade = $cidade;
-
-
+        if (count($erros) == 0) {        
+            $DAO  = new PessoaDAO();
+            $pessoa = new Pessoa();
+            $pessoa->nome     = $nome;
+            $pessoa->numsoc   = $numsoc;
+            $pessoa->endereco = $endereco;
+            $pessoa->telefone = $telefone;
+            $pessoa->cidade   = $cidade;
+           
                 if ($DAO->Inserir($pessoa)) {
                     $res = "PESSOA CADASTRADA COM SUCESSO!";
-                    header("Location: ../view/inserepessoa.php?result=$res");
+                    header("Location: ../View/inserepessoa.php?result=$res");
                 } else {
                     $erros[] = "ERRO NO BANCO DE DADOS: $DAO->erro";
                     $err = serialize($erros);
-                    header("Location: ../view/inserepessoa.php?error=$err&nome=$nome&numsoc=$numsoc");
+                    header("Location: ../View/inserepessoa.php?error=$err&nome=$nome&numsoc=$numsoc");
                 }
 
                 unset($pessoa);
@@ -91,6 +88,14 @@ class PessoaCon{
                 header("Location: ../view/inserepessoa.php?error=$err&nome=$nome&numsoc=$numsoc");
             }
         }
+    }
+
+    public function Excluir($pessoa){
+        
+            if(isset($_POST["add"])){
+                echo 'achou';
+            }
+            return true;
     }
 }
 ?>
