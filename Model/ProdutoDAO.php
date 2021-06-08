@@ -17,27 +17,33 @@ class ProdutoDAO{
             $stmt->bindValue(1, $produto->nome);
             $stmt->bindValue(2, $produto->preco);
             $stmt->bindValue(3, $produto->estoque);
+            
 
 
             $stmt->execute();
-            $this->p->commit();
+
+            $this->p->commit(); 
+            
             unset($this->p);
 
             return true;
-        } catch (PDOException $e) {
-            $this->erro = "ERRO: " . $e->getMessage();
-            return false;
+
         }
+         catch (PDOException $e) {
+            $this->erro = "ERRO: " . $e->getMessage();
+               return false;
+            }  
     }
 
-    public function Alterar($produto){
+
+    function Alterar($produto){
         try{
-            $stmt = $this->p->prepare("UPDATE produto SET nome=?, preco=?, estoque=? WHERE id=?");
+            $stmt = $this->p->prepare("UPDATE produto SET (nome, preco, estoque) VALUES (?, ?, ?)");
             $this->p->beginTransaction();
             $stmt->bindValue(1, $produto->nome);
             $stmt->bindValue(2, $produto->preco);
             $stmt->bindValue(3, $produto->estoque);
-            $stmt->bindValue(3, $produto->id);
+            
 
             $stmt->execute();
             $this->p->commit();
@@ -52,21 +58,21 @@ class ProdutoDAO{
 
     public function Excluir($produto){
         try{
-            $stmt = $this->p->prepare("DELETE FROM produto WHERE id=?");
+            $stmt = $this->p->prepare("DELETE FROM produto WHERE codigoproduto=?");
             $this->p->beginTransaction();
-            $stmt->bindValue(1, $produto->id);
+            $stmt->bindValue(1, $produto->codproduto);
             $stmt->execute();
             $this->p->commit();
             unset($this->p);
             return true;
-        }
-        catch(PDOException $e){
+        } 
+        catch (PDOException $e) {
             $this->erro = "ERRO: " . $e->getMessage();
             return false;
-        }
+        }  
     }
 
-    public function Consultar($query=null){
+    function Consultar($query=null){
         try{
             $items = array();
 
@@ -78,15 +84,15 @@ class ProdutoDAO{
             while($registro = $stmt->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)){
                 $p = new Produto();
 
-                if (isset($registro["id"]))
-                    $p->id = $registro["id"];
+                if (isset($registro["codproduto"]))
+                    $p->codproduto = $registro["codproduto"];
                 if (isset($registro["nome"]))
                     $p->nome = $registro["nome"];
                 if (isset($registro["preco"]))
-                    $p->numsoc = $registro["preco"];
-                if (isset($registro["eestoque"]))
-                    $p->endereco = $registro["estoque"];
-                                
+                    $p->preco = $registro["preco"];
+                if (isset($registro["estoque"]))
+                    $p->estoque = $registro["estoque"];
+                
                 // Ao final, adiciona o registro como um item do array de retorno
                 $items[] = $p;
             }
@@ -101,4 +107,3 @@ class ProdutoDAO{
         }
     }
 }
-?>
