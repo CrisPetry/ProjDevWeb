@@ -60,7 +60,7 @@
                         <button type="submit" name="button" id="button" class="btn btn-black">
                             <i class="fa-spinner fa" aria-hidden="true"></i>
                             Registrar</button>
-                        <a href="../index.php" class="btn btn-black">
+                        <a href="../View/UserLogin.php" class="btn btn-black">
                             <i class="fa-arrow-left fa" aria-hidden="true"></i>
                             Voltar</a>
                     </conteiner-fluid>

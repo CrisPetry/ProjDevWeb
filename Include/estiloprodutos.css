@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.content {
+    display: flexbox;
+    margin: auto;
+}
+
+.rtable {
+    border-collapse: collapse !important;
+}
+
+td {
+    text-align: center;
+}
+
+
+@media screen and (max-width: 480px) {
+    .content {
+        overflow-y: scroll;
+
+    }
+
+    .rTable thead {
+        display: none;
+    }
+
+    .rTable td {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .content {
+        width: 100%;
+    }
+
+    .rTable tr td:nth-child(1) {
+        width: 3%;
+    }
+
+    .rTable tr td:nth-child(2) {
+        width: 20%;
+    }
+
+    .rTable tr td:nth-child(3) {
+        width: 10%;
+    }
+
+    .rTable tr td:nth-child(4) {
+        width: 20%;
+    }
+
+    .rTable tr td:nth-child(5) {
+        width: 15%;
+    }
+}
+
+.rtable tr:nth-child(odd){
+    background-color: #fff;
+}
+
+.rTable tr:nth-child(even){
+    background-color: #ebe9e9;
+}
+
+
+html,
+body {
+    display: flex;
+    margin: 0;
+    width: 100%;
+    
+}
+
+h3 {
+    font-family: 'Merienda One', cursive !important;
+    font-size: large !important;
+    padding-top: 2rem;
+    text-align: center;
+}
+
+.btn-black {
+    font-family: 'Merienda One', cursive;
+    background-color: #000;
+    color: #f9f9f9 !important;
+    white-space: nowrap;
+}
+
+body>nav>div>form {
+    margin: 0;
+    display: inline-block;
+}
+
+.btn-black:hover {
+    text-decoration: none;
+    color: #fff;
+}

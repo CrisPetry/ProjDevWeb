@@ -138,7 +138,7 @@
                     </a>
                 </div>
                 <div class="col-lg-6 mbr-col-md-10">
-                    <a href="login.html">
+                    <a href="insereproduto.php">
                         <div class="wrap">
                             <div class="ico-wrap">
                                 <span class="mbr-iconfont fa-search fa"></span>
