@@ -109,5 +109,61 @@ class UserDAO {
     catch (PDOException $e) {
       echo "Erro: " . $e->getMessage();
     }
-  } 
+  }
+
+  public function Alterar($user)
+  {
+    try {
+      $stmt = $this->p->prepare("UPDATE usuario SET apelido=? WHERE id=?");
+      // Inicia a transação
+      $this->p->beginTransaction();
+      // Vincula um valor a um parâmetro da sentença SQL, na ordem
+      $stmt->bindValue(1, $user->apelido);
+      $stmt->bindValue(2, $user->senha);
+      $stmt->bindValue(6, $user->id);
+
+      // Executa a query
+      $stmt->execute();
+
+      // Grava a transação
+      $this->p->commit();
+
+      // Fecha a conexão DAO
+      $this->p = null;
+
+      return true;
+    }
+    // Em caso de erro, retorna a mensagem:
+    catch (PDOException $e) {
+      $this->erro = "Erro: " . $e->getMessage();
+      return false;
+    }
+  }
+
+  public function Excluir($user)
+  {
+    try {
+      $stmt = $this->p->prepare("DELETE FROM usuario WHERE id=?");
+      // Inicia a transação
+      $this->p->beginTransaction();
+      // Vincula um valor a um parâmetro da sentença SQL, na ordem
+      $stmt->bindValue(1, $user->id);
+
+      // Executa a query
+      $stmt->execute();
+
+      // Grava a transação
+      $this->p->commit();
+
+      // Fecha a conexão DAO
+      $this->p = null;
+
+      return true;
+    }
+    // Em caso de erro, retorna a mensagem:
+    catch (PDOException $e) {
+      $this->erro = "Erro: " . $e->getMessage();
+      return false;
+    }
+  }
 }

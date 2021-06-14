@@ -49,10 +49,11 @@ require_once("../Model/UserDAO.php");
             }
         }
 
-        public function consultaLista($op){
+    public function consultaLista($op)
+    {
         $DAO = new UserDAO();
         $lista = array();
-        $numCol = 4;
+        $numCol = 3;
 
         switch ($op) {
             case 1:
@@ -65,7 +66,7 @@ require_once("../Model/UserDAO.php");
                 $id         = $lista[$i]->id;
                 $apelido       = $lista[$i]->apelido;
                 $senha    = $lista[$i]->senha;
-               
+
 
 
                 echo "<tr>";
@@ -76,19 +77,6 @@ require_once("../Model/UserDAO.php");
                     echo "<td style=\"text-align: left;\">$apelido</td>";
                 if ($senha)
                     echo "<td style=\"text-align: right;\">$senha</td>";
-                
-
-                echo "<td>
-                        <button type='submit'  name='add' class='add'>
-                            <i class='fa-plus fa'></i>
-                        </button>&nbsp;
-                        <button type='submit' name='delete' value='del' class='delete'>
-                            <i class='fa-trash fa'></i>&nbsp;
-                        </button>
-                        <button type='submit' name='editar' value='editar' class='edit'>
-                            <i class='fa-edit fa'></i>
-                        </button>
-                    </td>";
                 echo "</tr>";
             }
         } else {
@@ -96,8 +84,51 @@ require_once("../Model/UserDAO.php");
             echo "<td colspan=\"$numCol\">Nenhum registro encontrado!</td>";
             echo "</tr>";
         }
-    
+    }
+
+    private function buscaDados($id, $modo) {
+        $DAO = new UserDAO();
+
+        $user = $DAO->ConsultarList(3, "id", $id);
+
+        if (count($user) == 1) {
+            $id = $user[0]->id;
+            $apelido  = $user[0]->apelido;
+            $senha = $user[0]->senha;
+
+
+            if ($modo == 0)
+            chamaFormAlterar($id, $apelido, $senha);
+            else
+                chamaFormExcluir($id, $apelido, $senha);
+
+            print "<script>";
+            print "document.formBuscar.buscaId.value = '$id';";
+            print "document.formBuscar.buscaId.disabled = true;";
+            print "document.formBuscar.button2.disabled  = true;";
+            print "</script>";
+        } else {
+            print "<script>";
+            print "alert('PRODUTO NÃO ENCONTRADO! Por favor, tente novamente...');";
+            print "</script>";
         }
+
+        unset($user);
+    }
+
+        private function preparaDados(){
+        $user = new User();
+
+        $apelido = $_POST["apelido"];
+        $senha  = $_POST["senha"];
+
+
+        $user->apelido = $apelido;
+        $user->senha = $senha;
+
+
+        return $user;
+    }
 
         public function controlaInsercao()
         {
@@ -152,6 +183,66 @@ require_once("../Model/UserDAO.php");
             unset($user);
         }
     }
-    }
 
-    ?>
+    public function controlaAlteracao()
+    {
+        if (isset($_POST["apelido"]) && isset($_POST["senha"])) {
+            $DAO  = new UserDAO();
+            $user = $this->preparaDados();
+
+            $id = $_POST["selId"];
+            $user->id = $id;
+
+            if ($DAO->Alterar($user)) {
+                print "<script>";
+                print "alert('USUÁRIO ALTERADO COM SUCESSO!');";
+                print "document.formBuscar.buscaId.disabled = false;";
+                print "document.formBuscar.button2.disabled  = false;";
+                print "window.location = '../view/editauser.php';";
+                print "</script>";
+            } else {
+                print "<script>";
+                print "alert('Registro NÃO ALTERADO! ERRO: $DAO->erro');";
+                print "document.getElementById('buscaId').value = '$id';";
+                print "document.getElementById('formBuscar').submit();";
+                print "</script>";
+            }
+
+            unset($user);
+        } else if (isset($_POST["buscaId"])) {
+            $id = $_POST["buscaId"];
+            $this->buscaDados($id, 0);
+        }
+    }
+    public function controlaExclusao()
+    {
+        if (isset($_POST["selId"])) {
+            $DAO  = new UserDAO();
+            $user = new User();
+
+            $id = $_POST["selId"];
+            $user->id = $id;
+
+            if ($DAO->Excluir($user)) {
+                print "<script>";
+                print "alert('USUÁRIO EXCLUÍDO COM SUCESSO!');";
+                print "document.formBuscar.buscaId.disabled = false;";
+                print "document.formBuscar.button2.disabled  = false;";
+                print "window.location = '../View/deletaUser.php';";
+                print "</script>";
+            } else {
+                print "<script>";
+                print "alert('Registro NÃO EXCLUÍDO! ERRO: $DAO->erro');";
+                print "document.getElementById('buscaId').value = '$id';";
+                print "document.getElementById('formBuscar').submit();";
+                print "</script>";
+            }
+
+            unset($user);
+        } else if (isset($_POST["buscaId"])) {
+            $id = $_POST["buscaId"];
+            $this->buscaDados($id, 1);
+        }
+    }
+}
+?>

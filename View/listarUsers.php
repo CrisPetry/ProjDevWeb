@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Listar Produtos</title>
+    <title>Listar Usuários</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../CSS/estiloUser.css">
@@ -14,7 +14,7 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<style>
+    <style>
     table {
         border-radius: 12rem !important;
     }
@@ -120,6 +120,9 @@
             </form>
         </div>
     </nav>
+    <?php
+    include("../include/SessaoValidate.php");  // Faz a autenticação
+    ?>
     <div class="card-body">
         <div class="jumbotron">
             <div class="card">
@@ -131,19 +134,27 @@
                                 <th>ID</th>
                                 <th>Usuário</th>
                                 <th>Senha</th>
-                                <th>Ações</th>
                             </tr>
                         </thead>
 
                         <?php
-                        include("../include/SessaoValidate.php");  // Faz a autenticação
                         include_once("../controller/UserCon.php");
                         $obj = new UserCon();
                         $obj->conConsulta(1);
                         $obj->consultaLista(1);
                         ?>
                     </table>
+                    <a href="deletaUser.php" class="text-decoration-none">
+                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                    </a>
 
+                    <a href="editapessoa.php" class="text-decoration-none">
+                        <button type="button" class="btn btn-primary"><i class="fa fa-edit"></i></button>
+                    </a>
+
+                    <a href="createUser.php" class="text-decoration-none">
+                        <button type="button" class="btn btn-success"><i class="fa fa-plus"></i></button>
+                    </a>
                 </div>
             </div>
         </div>
