@@ -96,7 +96,7 @@ class PessoaDAO{
         }
     }
 
-  public function Consultar($op, $param, $value)
+  public function Consultar($op)
   {
     try {
       $items = array();
@@ -104,15 +104,6 @@ class PessoaDAO{
       switch ($op) {
         case 1:
           $query = "SELECT * FROM pessoa ORDER BY id";
-          break;
-        case 2:
-          $query = "SELECT * FROM pessoa ORDER BY nome";
-          break;
-        case 3:
-          $query = "SELECT nome, numsoc FROM pessoa ORDER BY cidade asc";
-          break;
-        case 4:
-          $query = "SELECT nome, numsoc, endereco FROM pessoa WHERE $param=$value";
           break;
       }
 

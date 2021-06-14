@@ -9,13 +9,11 @@ class PessoaCon {
   {
     $DAO = new PessoaDAO();
     $lista = array();
-    $lista = $DAO->Consultar($op, "", "");
+    $lista = $DAO->Consultar($op);
 
-    if ($op != 3)
-      $numCol = 4;
-    else
-      $numCol = 2;
-
+    if ($op != 5)
+      $numCol = 6;
+   
     if (count($lista) > 0) {
       for ($i = 0; $i < count($lista); $i++) {
         $id   = $lista[$i]->id;

@@ -9,7 +9,7 @@ class ProdutoCon{
     public function conConsulta($op){
         $DAO = new ProdutoDAO();
         $lista = array();
-        $numCol = 5;
+        $numCol = 4;
 
         switch($op){
             case 1:
@@ -45,46 +45,136 @@ class ProdutoCon{
             echo "</tr>";
         }
     }
+
+    private function buscaDados($codproduto, $modo)
+    {
+        $DAO = new ProdutoDAO();
+
+        $produto = $DAO->Consultar(4, "codproduto", $codproduto);
+
+        if (count($produto) == 1) {
+            $nome = $produto[0]->nome;
+            $preco  = $produto[0]->preco;
+            $estoque = $produto[0]->estoque;
+            
+
+
+            if ($modo == 0)
+                chamaFormAlterar($codproduto, $nome, $preco, $estoque);
+            else
+                chamaFormExcluir($codproduto, $nome, $preco, $estoque);
+
+            print "<script>";
+            print "document.formBuscar.buscaCod.value = '$codproduto';";
+            print "document.formBuscar.buscaCod.disabled = true;";
+            print "document.formBuscar.button2.disabled  = true;";
+            print "</script>";
+        } else {
+            print "<script>";
+            print "alert('PRODUTO NÃO ENCONTRADO! Por favor, tente novamente...');";
+            print "</script>";
+        }
+
+        unset($produto);
+    }
+
+    private function preparaDados()
+    {
+        $produto = new Produto();
+
+        $nome = $_POST["nome"];
+        $preco  = $_POST["preco"];
+        $estoque = $_POST["estoque"];
+
+        $produto->nome = $nome;
+        $produto->preco = $preco;
+        $produto->estoque = $estoque;
+    
+        return $produto;
+    }
+
     public function controlaInsercao()
     {
         if (isset($_POST["nome"]) && isset($_POST["preco"]) && isset($_POST["estoque"])) {
-            $erros     = array();
-            $nome      = $_POST["nome"];
-            $preco     = $_POST["preco"];
-            $estoque   = $_POST["estoque"];
-            
-
-        if (count($erros) == 0) {        
             $DAO  = new ProdutoDAO();
-            $produto = new Produto();
-            $produto->nome    = $nome;
-            $produto->preco   = $preco;
-            $produto->estoque = $estoque;
+            $produto = $this->preparaDados();
 
-           
-                if ($DAO->Inserir($produto)) {
-                    $res = "PRODUTO CADASTRADA COM SUCESSO!";
-                    header("Location: ../View/insereproduto.php?result=$res");
-                } else {
-                    $erros[] = "ERRO NO BANCO DE DADOS: $DAO->erro";
-                    $err = serialize($erros);
-                    
-                }
-
-                unset($produto);
+            if ($DAO->Inserir($produto)) {
+                print "<script>";
+                print "alert('PRODUTO CADASTRADO COM SUCESSO!');";
+                print "window.location = '../view/insereproduto.php';";
+                print "</script>";
             } else {
-                $err = serialize($erros);
-                header("Location: ../view/insereproduto.php?error=$err&nome=$nome&preco=$preco");
+                print "<script>";
+                print "alert('Registro NÃO CADASTRADO! ERRO: $DAO->erro');";
+                print "document.getElementById('nome').value = '$produto->nome';";
+                print "document.getElementById('preco').value = '$produto->preco';";
+                print "document.getElementById('estoque').value = '$produto->estoque';";
+                print "</script>";
             }
+
+            unset($produto);
         }
     }
 
-    public function Excluir($produto){
-        
-            if(isset($_POST["add"])){
-                echo 'achou';
+    public function controlaAlteracao()
+    {
+        if (isset($_POST["nome"]) && isset($_POST["preco"]) && isset($_POST["estoque"])) {
+            $DAO  = new ProdutoDAO();
+            $produto = $this->preparaDados();
+
+            $codproduto = $_POST["selcod"];
+            $produto->codproduto = $codproduto;
+
+            if ($DAO->Alterar($produto)) {
+                print "<script>";
+                print "alert('PRODUTO ALTERADO COM SUCESSO!');";
+                print "document.formBuscar.buscaCod.disabled = false;";
+                print "document.formBuscar.button2.disabled  = false;";
+                print "window.location = '../view/editaproduto.php';";
+                print "</script>";
+            } else {
+                print "<script>";
+                print "alert('Registro NÃO ALTERADO! ERRO: $DAO->erro');";
+                print "document.getElementById('buscaCod').value = '$codproduto';";
+                print "document.getElementById('formBuscar').submit();";
+                print "</script>";
             }
-            return true;
+
+            unset($produto);
+        } else if (isset($_POST["buscaCod"])) {
+            $codproduto = $_POST["buscaCod"];
+            $this->buscaDados($codproduto, 0);
+        }
+    }
+    public function controlaExclusao()
+    {
+        if (isset($_POST["selcod"])) {
+            $DAO  = new ProdutoDAO();
+            $produto = new Produto();
+
+            $codproduto = $_POST["selcod"];
+            $produto->codproduto = $codproduto;
+
+            if ($DAO->Excluir($produto)) {
+                print "<script>";
+                print "alert('PRODUTO EXCLUÍDO COM SUCESSO!');";
+                print "document.formBuscar.buscaCod.disabled = false;";
+                print "document.formBuscar.button2.disabled  = false;";
+                print "window.location = '../View/deletaproduto.php';";
+                print "</script>";
+            } else {
+                print "<script>";
+                print "alert('Registro NÃO EXCLUÍDO! ERRO: $DAO->erro');";
+                print "document.getElementById('buscaCod').value = '$codproduto';";
+                print "document.getElementById('formBuscar').submit();";
+                print "</script>";
+            }
+
+            unset($produto);
+        } else if (isset($_POST["buscaCod"])) {
+            $codproduto = $_POST["buscaCod"];
+            $this->buscaDados($codproduto, 1);
+        }
     }
 }
-?>

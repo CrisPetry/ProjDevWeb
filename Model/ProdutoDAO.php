@@ -36,41 +36,63 @@ class ProdutoDAO{
     }
 
 
-    function Alterar($produto){
-        try{
-            $stmt = $this->p->prepare("UPDATE produto SET (nome, preco, estoque) VALUES (?, ?, ?)");
+    public function Alterar($produto)
+    {
+        try {
+            $stmt = $this->p->prepare("UPDATE produto SET nome=?, preco=?, estoque=? WHERE codproduto=?");
+            // Inicia a transação
             $this->p->beginTransaction();
+            // Vincula um valor a um parâmetro da sentença SQL, na ordem
             $stmt->bindValue(1, $produto->nome);
             $stmt->bindValue(2, $produto->preco);
             $stmt->bindValue(3, $produto->estoque);
+            $stmt->bindValue(4, $produto->codproduto);
             
 
+            // Executa a query
             $stmt->execute();
+
+            // Grava a transação
             $this->p->commit();
-            unset($this->p);
+
+            // Fecha a conexão DAO
+            $this->p = null;
+
             return true;
         }
-        catch(PDOException $e){
-            $this->erro = "ERRO: " . $e->getMessage();
-        return false;
+        // Em caso de erro, retorna a mensagem:
+        catch (PDOException $e) {
+            $this->erro = "Erro: " . $e->getMessage();
+            return false;
+        }
+    }
+    public function Excluir($produto)
+    {
+        try {
+            $stmt = $this->p->prepare("DELETE FROM produto WHERE codproduto=?");
+            // Inicia a transação
+            $this->p->beginTransaction();
+            // Vincula um valor a um parâmetro da sentença SQL, na ordem
+            $stmt->bindValue(1, $produto->codproduto);
+
+            // Executa a query
+            $stmt->execute();
+
+            // Grava a transação
+            $this->p->commit();
+
+            // Fecha a conexão DAO
+            $this->p = null;
+
+            return true;
+        }
+        // Em caso de erro, retorna a mensagem:
+        catch (PDOException $e) {
+            $this->erro = "Erro: " . $e->getMessage();
+            return false;
         }
     }
 
-    public function Excluir($produto){
-        try{
-            $stmt = $this->p->prepare("DELETE FROM produto WHERE codigoproduto=?");
-            $this->p->beginTransaction();
-            $stmt->bindValue(1, $produto->codproduto);
-            $stmt->execute();
-            $this->p->commit();
-            unset($this->p);
-            return true;
-        } 
-        catch (PDOException $e) {
-            $this->erro = "ERRO: " . $e->getMessage();
-            return false;
-        }  
-    }
 
     function Consultar($query=null){
         try{

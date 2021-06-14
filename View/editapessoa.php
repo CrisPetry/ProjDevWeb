@@ -11,7 +11,7 @@
 
 <body class="jumbotron jumbotron-fluid">
     <div class="container">
-        <h3>Alteração de dados de um produto</h3>
+        <h3>Editar Pessoa</h3>
         <form id="formBuscar" name="formBuscar" method="post" action="editapessoa.php">
             <label>Informe o código do produto:
                 <input type="text" name="buscaId" id="buscaId" required>
