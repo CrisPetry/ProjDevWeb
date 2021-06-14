@@ -76,4 +76,38 @@ class UserDAO {
       return 0;
     }
   }
+
+  function ConsultarList($query = null)
+  {
+    try {
+      $items = array();
+
+      if ($query != null)
+        $stmt = $this->p->query($query);
+      else
+        $stmt = $this->p->query("SELECT * FROM usuario");
+
+      while ($registro = $stmt->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
+        $p = new User();
+
+        if (isset($registro["id"]))
+        $p->id = $registro["id"];
+        if (isset($registro["apelido"]))
+        $p->apelido = $registro["apelido"];
+        if (isset($registro["senha"]))
+        $p->senha = $registro["senha"];
+        
+        // Ao final, adiciona o registro como um item do array de retorno
+        $items[] = $p;
+      }
+      // Fecha a conexão
+      unset($this->p);
+
+      return $items;
+    }
+    // Em caso de erro, retorna a mensagem:
+    catch (PDOException $e) {
+      echo "Erro: " . $e->getMessage();
+    }
+  } 
 }

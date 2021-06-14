@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Listar Pessoas</title>
+    <title>Inserir Produtos</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../CSS/estilopessoa.css">
+    <link rel="stylesheet" href="../CSS/estiloUser.css">
     <link rel="icon" type="imagem/png" href="../Imagens/logo.png" />
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -73,16 +73,12 @@
         .dropdown-content {
             display: none;
             position: absolute;
-            background-color: #000;
+            background-color: #f9f9f9;
             box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
             z-index: 1;
         }
 
-        .fa-edit fa {
-            align-content: right;
-        }
-
-        .content>table>tbody>tr>td>button {
+        body>div>div>div.content>table>tbody>tr>td>button {
             border: none;
             color: #000;
             cursor: pointer;
@@ -90,12 +86,14 @@
             background-color: transparent;
         }
 
-        .card {
-            padding-bottom: 2rem;
+        body>div>div>div.content>table>tbody>tr>td>button:hover {
+            text-decoration: none;
+            background-color: transparent;
+            color: black;
         }
 
-        .rTable {
-            margin-bottom: 1rem;
+        .fa-edit fa {
+            align-content: right;
         }
     </style>
 </head>
@@ -104,7 +102,7 @@
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand"><img src="../Imagens/logo.png" alt="roupex" height="60" width="60"></a>
-            <form action="listapessoa.php" method="POST">
+            <form class="d-flex">
                 <i class="fa fa-user fa-lg">&nbsp;</i>
                 <div class="dropdown">
                     <h5 id="idLogin" style="text-align: right"></h5>
@@ -112,76 +110,85 @@
                         <a href="../View/logout.php" class="btn btn-black">
                             <i class="fa-power-off fa" aria-hidden="true"></i>
                             Sair</a>
-                        <a href="../View/dashboard.php" class="btn btn-black">
-                            <i class="fa-arrow-left fa" aria-hidden="true"></i>
-                            Voltar</a>
                     </div>
                 </div>
             </form>
         </div>
     </nav>
+
     <?php
-    include("../include/SessaoValidate.php");  // Faz a autenticação
+    include("../Include/SessaoValidate.php");
+    include_once("../controller/UserCon.php");
+    $obj = new UserCon();
+    $obj->controlaCreate();
     ?>
-    <div class="card-body">
-        <div class="jumbotron">
-            <div class="card">
-                <h3>REGISTROS DE PESSOAS</h3>
-                <div class="content">
-                    <table class="rTable">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nome</th>
-                                <th>CPF/CNPJ</th>
-                                <th>Endereço</th>
-                                <th>Telefone</th>
-                                <th>Cidade</th>
-                            </tr>
-                        </thead>
 
-                        <?php
-                        include_once("../Controller/PessoaCon.php");
-                        $obj = new PessoaCon();
-                        $obj->controlaConsulta(1);
-                        ?>
+    <div class="conteiner">
+        <div class="form-group">
+            <h3 style="text-align: center;">CADASTRAR USUÁRIO</h3>
+        </div>
 
-                    </table>
-                    <a href="deletapessoa.php" class="text-decoration-none">
-                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                    </a>
+        <form id="formInserir" name="formInserir" method="POST" action="createUser.php">
 
-                    <a href="editapessoa.php" class="text-decoration-none">
-                        <button type="button" class="btn btn-primary"><i class="fa fa-edit"></i></button>
-                    </a>
-
-                    <a href="inserepessoa.php" class="text-decoration-none">
-                        <button type="button" class="btn btn-success"><i class="fa fa-plus"></i></button>
-                    </a>
+            <div class="form-group">
+                <div class="   col-md-6 offset-md-3">
+                    <label>USUÁRIO</label>
+                    <input type="text" name="user" id="user" class="form-control" placeholder="Informe seu usuário" required />
                 </div>
             </div>
-        </div>
+
+            <div class="form-group">
+                <div class="col-md-6 offset-md-3">
+                    <label>SENHA</label>
+                    <input type="password" name="pwd" id="pwd" class="form-control" placeholder="Informe sua senha" required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-6 offset-md-3">
+                    <input type="submit" value="Inserir" class="btn btn-primary" name="button" id="button">
+                    <a href="../View/listarUsers.php">
+                        <input type="button" value="Voltar" class="btn btn-success" name="voltar" id="voltar"></a>
+                </div>
+            </div>
     </div>
-    </div>
-    </div>
+    </form>
+
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous">
     </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js" integrity="sha512-d4KkQohk+HswGs6A1d6Gak6Bb9rMWtxjOa0IiY49Q3TeFd5xAzjWXDCBW9RS7m86FQ4RzM2BdHmdJnnKRYknxw==" crossorigin="anonymous"></script>
     </div>
 
     <script>
-        $('.add').click(function() {
-            window.location.href = 'inserepessoa.php';
-        })
-    </script>
+        document.querySelector('#formInserir').addEventListener('submit', function(e) {
+            var form = this;
 
-    <script>
-        $('.delete').click(function() {
-            window.location.href = 'deletapessoa.php';
-        })
+            e.preventDefault();
+
+            swal({
+                title: "Salvar registro?",
+                icon: "warning",
+                buttons: [
+                    'Não',
+                    'Sim'
+                ],
+                dangerMode: true,
+            }).then(function(isConfirm) {
+                if (isConfirm) {
+                    swal({
+                        title: 'Produto Adicionado!',
+                        icon: 'success'
+                    }).then(function() {
+                        form.submit();
+                    });
+                }
+            });
+        });
     </script>
 </body>
 

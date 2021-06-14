@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
             id="bootstrap-css" />
-        <link href="../Include/estilosCadastro.css" rel="stylesheet" />
+        <link href="../CSS/estilosCadastro.css" rel="stylesheet" />
         <link rel="icon" type="imagem/png" href="../Include/logo.png" />
 
         <!-- Scripts -->

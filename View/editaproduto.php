@@ -5,16 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Listar Produtos</title>
+    <title>Inserir Produtos</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../CSS/estiloUser.css">
+    <link rel="stylesheet" href="../CSS/estiloproduto.css">
     <link rel="icon" type="imagem/png" href="../Imagens/logo.png" />
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<style>
+    <style>
     table {
         border-radius: 12rem !important;
     }
@@ -73,16 +73,12 @@
     .dropdown-content {
         display: none;
         position: absolute;
-        background-color: #000;
+        background-color: #f9f9f9;
         box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
         z-index: 1;
     }
 
-    .fa-edit fa {
-        align-content: right;
-    }
-
-    .content>table>tbody>tr>td>button {
+    body>div>div>div.content>table>tbody>tr>td>button {
         border: none;
         color: #000;
         cursor: pointer;
@@ -90,12 +86,14 @@
         background-color: transparent;
     }
 
-    .card {
-        padding-bottom: 2rem;
+    body>div>div>div.content>table>tbody>tr>td>button:hover {
+        text-decoration: none;
+        background-color: transparent;
+        color: black;
     }
 
-    .rTable {
-        margin-bottom: 1rem;
+    .fa-edit fa {
+        align-content: right;
     }
     </style>
 </head>
@@ -112,50 +110,67 @@
                         <a href="../View/logout.php" class="btn btn-black">
                             <i class="fa-power-off fa" aria-hidden="true"></i>
                             Sair</a>
-                        <a href="../View/dashboard.php" class="btn btn-black">
-                            <i class="fa-arrow-left fa" aria-hidden="true"></i>
-                            Voltar</a>
                     </div>
                 </div>
             </form>
         </div>
     </nav>
-    <div class="card-body">
-        <div class="jumbotron">
-            <div class="card">
-                <h3>REGISTROS DE USUÁRIOS</h3>
-                <div class="content">
-                    <table class="rTable">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Usuário</th>
-                                <th>Senha</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
 
-                        <?php
-                        include("../include/SessaoValidate.php");  // Faz a autenticação
-                        include_once("../controller/UserCon.php");
-                        $obj = new UserCon();
-                        $obj->conConsulta(1);
-                        $obj->consultaLista(1);
-                        ?>
-                    </table>
+    <?php
+    include("../Include/SessaoValidate.php");
+    include_once("../controller/ProdutoCon.php");
+    $obj = new ProdutoCon();
+    $obj->controlaInsercao();
+    ?>
 
+    <div class="conteiner">
+        <div class="form-group">
+            <h3 style="text-align: center;">EDITAR PRODUTO</h3>
+        </div>
+
+        <form id="formInserir" name="formInserir" method="POST" action="insereproduto.php">
+
+            <div class="form-group">
+                <div class="   col-md-6 offset-md-3">
+                    <label>DESCRIÇÃO</label>
+                    <input type="text" name="nome" id="nome" class="form-control " required>
                 </div>
             </div>
-        </div>
+
+            <div class="form-group">
+                <div class="col-md-6 offset-md-3">
+                    <label>PREÇO</label>
+                    <input type="text" name="preco" id="preco" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-6 offset-md-3">
+                    <label>QUANTIDADE (somente números inteiros)</label>
+                    <input type="text" name="estoque" id="estoque" class="form-control" required>
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="col-md-6 offset-md-3">
+                    <input type="submit" value="Inserir" class="btn btn-primary" name="button" id="button">
+                    <a href="../View/listaProduto.php">
+                        <input type="button" value="Voltar" class="btn btn-success" name="voltar" id="voltar"></a>
+                </div>
+            </div>
     </div>
-    </div>
-    </div>
+    </form>
+
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
         integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous">
     </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"
         integrity="sha512-d4KkQohk+HswGs6A1d6Gak6Bb9rMWtxjOa0IiY49Q3TeFd5xAzjWXDCBW9RS7m86FQ4RzM2BdHmdJnnKRYknxw=="
@@ -163,13 +178,31 @@
     </div>
 
     <script>
-    $('.add').click(function() {
-        window.location.href = 'createUser.php';
-    })
+    document.querySelector('#formInserir').addEventListener('submit', function(e) {
+        var form = this;
+
+        e.preventDefault();
+
+        swal({
+            title: "Salvar registro?",
+            icon: "warning",
+            buttons: [
+                'Não',
+                'Sim'
+            ],
+            dangerMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                swal({
+                    title: 'Produto Adicionado!',
+                    icon: 'success'
+                }).then(function() {
+                    form.submit();
+                });
+            }
+        });
+    });
     </script>
-
-
-
 </body>
 
 </html>

@@ -8,8 +8,8 @@
     <title>Dash</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../Include/estilodash.css">
-    <link rel="icon" type="imagem/png" href="../Include/logo.png" />
+    <link rel="stylesheet" href="../CSS/estilodash.css">
+    <link rel="icon" type="imagem/png" href="../Imagens/logo.png" />
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -84,7 +84,7 @@
 
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand"><img src="../Include/logo.png" alt="roupex" height="60" width="60"></a>
+            <a class="navbar-brand"><img src="../Imagens/logo.png" alt="roupex" height="60" width="60"></a>
             <form class="d-flex">
                 <i class="fa fa-user fa-lg">&nbsp;</i>
                 <div class="dropdown">

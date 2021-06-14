@@ -9,7 +9,7 @@ class ProdutoCon{
     public function conConsulta($op){
         $DAO = new ProdutoDAO();
         $lista = array();
-        $numCol = 4;
+        $numCol = 5;
 
         switch($op){
             case 1:
@@ -35,6 +35,7 @@ class ProdutoCon{
                     echo "<td style=\"text-align: right;\">$preco</td>";
                 if ($estoque)
                 echo "<td style=\"text-align: left;\">$estoque</td>";
+
                 echo "</tr>";
             }
         }

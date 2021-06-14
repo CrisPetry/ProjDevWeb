@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Página Principal</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="Include/bootstrap.min.css" rel="stylesheet" />
-    <link href="Include/estilo.css" rel="stylesheet" />
-    <link rel="icon" type="imagem/png" href="./Include/logo.png" />
+    <link href="CSS/bootstrap.min.css" rel="stylesheet" />
+    <link href="CSS/estilo.css" rel="stylesheet" />
+    <link rel="icon" type="imagem/png" href="./Imagens/logo.png" />
 
 
-    <style>
+<style>
         body>main>div.row.mb-2>div:nth-child(2)>div>div.col.p-4.d-flex.flex-column.position-static {
             background-color: whitesmoke;
         }
@@ -47,7 +47,7 @@
 <body>
 
     <nav class="navbar navbar-light bg-light justify-content-between" id="headir">
-        <img src="Include/logo.png" alt="roupex" height="90" width="90">
+        <img src="Imagens/logo.png" alt="roupex" height="90" width="90">
         <a href="View/UserLogin.php" class="btn btn-black">
             <i class="fa-arrow-right fa" aria-hidden="true"></i>
             Logar</a>
@@ -92,7 +92,7 @@
                     </div>
                     <div class="col-auto d-none d-lg-block">
                         <svg class="bd-placeholder-img" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" width="250" height="250" preserveAspectRatio="xMidYMid slice">
-                            <image xlink:href="Include/estoque.png" width="100%" height="100%" />
+                            <image xlink:href="Imagens/estoque.png" width="100%" height="100%" />
                         </svg>
                     </div>
                 </div>
@@ -120,7 +120,7 @@
                     </div>
                     <div class="col-auto d-none d-lg-block">
                         <svg class="bd-placeholder-img" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" height="250" width="250" preserveAspectRatio="xMidYMid meet" focusable="false">
-                            <image xlink:href="Include/venda.png" width="100%" height="100%" />
+                            <image xlink:href="Imagens/venda.png" width="100%" height="100%" />
                         </svg>
                     </div>
                 </div>

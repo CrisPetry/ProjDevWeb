@@ -13,7 +13,7 @@ require_once("../Model/UserDAO.php");
     <title>Cadastrar Usuário</title>
 
 
-    
+
 </head>
 
 <?php
@@ -49,7 +49,55 @@ require_once("../Model/UserDAO.php");
             }
         }
 
+        public function consultaLista($op){
+        $DAO = new UserDAO();
+        $lista = array();
+        $numCol = 4;
 
+        switch ($op) {
+            case 1:
+                $lista = $DAO->ConsultarList();
+                break;
+        }
+
+        if (count($lista) > 0) {
+            for ($i = 0; $i < count($lista); $i++) {
+                $id         = $lista[$i]->id;
+                $apelido       = $lista[$i]->apelido;
+                $senha    = $lista[$i]->senha;
+               
+
+
+                echo "<tr>";
+
+                if ($id)
+                    echo "<td style=\"text-align: center;\">$id</td>";
+                if ($apelido)
+                    echo "<td style=\"text-align: left;\">$apelido</td>";
+                if ($senha)
+                    echo "<td style=\"text-align: right;\">$senha</td>";
+                
+
+                echo "<td>
+                        <button type='submit'  name='add' class='add'>
+                            <i class='fa-plus fa'></i>
+                        </button>&nbsp;
+                        <button type='submit' name='delete' value='del' class='delete'>
+                            <i class='fa-trash fa'></i>&nbsp;
+                        </button>
+                        <button type='submit' name='editar' value='editar' class='edit'>
+                            <i class='fa-edit fa'></i>
+                        </button>
+                    </td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr>";
+            echo "<td colspan=\"$numCol\">Nenhum registro encontrado!</td>";
+            echo "</tr>";
+        }
+    
+        }
 
         public function controlaInsercao()
         {
@@ -77,6 +125,33 @@ require_once("../Model/UserDAO.php");
                 unset($user);
             }
         }
+
+    public function controlaCreate()
+    {
+
+        if (isset($_POST["user"]) && isset($_POST["pwd"])) {
+            $erros = array();
+            $user = new User();
+            $user->apelido = $_POST['user'];
+            $user->senha = md5($_POST['pwd']);
+
+            $DAO = new UserDAO();
+            $result = $DAO->Inserir($user);
+            if ($result == 1) {
+                $res = "Usuário Adicionado";
+                header("Location: ../view/createUser.php?result=$res");
+            } else if ($result == -1) {
+                $erros[] = "Usuário já cadastrado!";
+                $err = serialize($erros);
+                header("Location: ../view/createUser.php?error=$err");
+            } else {
+                $erros[] = "ERRO NO BANCO DE DADOS: $DAO->erro";
+                $err = serialize($erros);
+                header("Location: ../view/createUser.php?error$err");
+            }
+            unset($user);
+        }
+    }
     }
 
     ?>

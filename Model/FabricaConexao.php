@@ -2,7 +2,6 @@
 
 class FabricaConexao extends PDO {
     private $dbn = "pgsql:host=localhost;port=5432;dbname=LojaRoupa";
-    //private $dbn = "mysql:host=localhost;port=3308;dbname=LojaRoupa";
     private $usr = "postgres";
     private $pwd = "masterkey";
     public $handle = null; 
