@@ -143,7 +143,7 @@
                         <?php
                         include_once("../Controller/PessoaCon.php");
                         $obj = new PessoaCon();
-                        $obj->controlaConsulta(1);
+                        $obj->consultaLista(1);
                         ?>
 
                     </table>

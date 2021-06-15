@@ -5,13 +5,60 @@ require_once("../model/PessoaDAO.php");
 
 class PessoaCon {
 
+  public function consultaLista($op)
+  {
+    $DAO = new PessoaDAO();
+    $lista = array();
+    $numCol = 6;
+
+    switch ($op) {
+      case 1:
+        $lista = $DAO->ConsultarList();
+        break;
+    }
+
+    if (count($lista) > 0) {
+      for ($i = 0; $i < count($lista); $i++) {
+        $id         = $lista[$i]->id;
+        $nome       = $lista[$i]->nome;
+        $numsoc    = $lista[$i]->numsoc;
+        $endereco  = $lista[$i]->endereco;
+        $telefone = $lista[$i]->telefone;
+        $cidade = $lista[$i]->cidade;
+
+
+
+
+        echo "<tr>";
+
+        if ($id)
+          echo "<td style=\"text-align: center;\">$id</td>";
+        if ($nome)
+          echo "<td style=\"text-align: left;\">$nome</td>";
+        if ($numsoc)
+          echo "<td style=\"text-align: right;\">$numsoc</td>";
+        if ($endereco)
+          echo "<td style=\"text-align: right;\">$endereco</td>";
+        if ($telefone)
+          echo "<td style=\"text-align: right;\">$telefone</td>";
+        if ($cidade)
+          echo "<td style=\"text-align: right;\">$cidade</td>";
+        echo "</tr>";
+      }
+    } else {
+      echo "<tr>";
+      echo "<td colspan=\"$numCol\">Nenhum registro encontrado!</td>";
+      echo "</tr>";
+    }
+  }
+
   public function controlaConsulta($op)
   {
     $DAO = new PessoaDAO();
     $lista = array();
-    $lista = $DAO->Consultar($op);
+    $lista = $DAO->Consultar($op, "", "");
 
-    if ($op != 5)
+    if ($op != 1)
       $numCol = 6;
    
     if (count($lista) > 0) {
@@ -133,7 +180,7 @@ class PessoaCon {
       $pessoa = $this->preparaDados();
 
       $id = $_POST["selId"];
-      $pessoa->codigo = $id;
+      $pessoa->id = $id;
 
       if ($DAO->Alterar($pessoa)) {
         print "<script>";

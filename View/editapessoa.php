@@ -30,27 +30,27 @@
                 <input type="hidden" name="selId" id="selId" value="<?php print $id; ?>">
                 <p>
                     <label>Nome da pessoa:
-                        <input type="text" name="nome" id="nome" value="<?php print $nome; ?>" readonly>
+                        <input type="text" name="nome" id="nome" value="<?php print $nome; ?>" >
                     </label>
                 </p>
                 <p>
                     <label>CPF/CNPJ:
-                        <input type="text" name="numsoc" id="numsoc" value="<?php print $numsoc; ?>" readonly>
+                        <input type="text" name="numsoc" id="numsoc" value="<?php print $numsoc; ?>">
                     </label>
                 </p>
                 <p>
                     <label>Endereço:
-                        <input type="text" name="endereco" id="endereco" value="<?php print $endereco; ?>" readonly>
+                        <input type="text" name="endereco" id="endereco" value="<?php print $endereco; ?>">
                     </label>
                 </p>
                 <p>
                     <label>Telefone:
-                        <input type="text" name="telefone" id="telefone" value="<?php print $telefone; ?>" readonly>
+                        <input type="text" name="telefone" id="telefone" value="<?php print $telefone; ?>">
                     </label>
                 </p>
                 <p>
                     <label>Endereço:
-                        <input type="text" name="cidade" id="cidade" value="<?php print $cidade; ?>" readonly>
+                        <input type="text" name="cidade" id="cidade" value="<?php print $cidade; ?>">
                     </label>
                 </p>
                 <p>
