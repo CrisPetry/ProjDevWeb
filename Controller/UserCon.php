@@ -28,7 +28,7 @@ require_once("../Model/UserDAO.php");
                 $user->senha = md5($_POST['pwd']);
 
                 $DAO = new UserDAO();
-                $result = $DAO->Consultar($user);
+                $result = $DAO->ConsultUser($user);
 
                 if ($result) { /* Testa se a consulta retornou algum registro */
                     if ($result == -2) {
@@ -86,10 +86,44 @@ require_once("../Model/UserDAO.php");
         }
     }
 
+    public function controlaConsulta($op)
+    {
+        $DAO = new UserDAO();
+        $lista = array();
+        $lista = $DAO->Consultar($op, "", "");
+
+        if ($op != 1)
+        $numCol = 3;
+
+        if (count($lista) > 0) {
+            for ($i = 0; $i < count($lista); $i++) {
+                $id   = $lista[$i]->id;
+                $apelido = $lista[$i]->apelido;
+                $senha  = $lista[$i]->senha;
+                
+
+                print "<tr>";
+
+                if ($id)
+                    print "<td style='text-align: center;'>$id</td>";
+                if ($apelido)
+                    print "<td style='text-align: left;'>$apelido</td>";
+                if ($senha)
+                    print "<td style='text-align: center;'>$senha</td>";
+                
+                print "</tr>";
+            }
+        } else {
+            print "<tr>";
+            print "<td colspan='$numCol'>Nenhum registro encontrado!</td>";
+            print "</tr>";
+        }
+    }
+
     private function buscaDados($id, $modo) {
         $DAO = new UserDAO();
 
-        $user = $DAO->ConsultarList(3, "id", $id);
+        $user = $DAO->Consultar(3, "id", $id);
 
         if (count($user) == 1) {
             $id = $user[0]->id;

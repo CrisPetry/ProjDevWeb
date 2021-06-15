@@ -22,7 +22,7 @@
     $user->senha = $senha_usuario;
   
     $DAO = new UserDAO();
-    $result = $DAO->Consultar($user);
+    $result = $DAO->ConsultUser($user);
     
     if($result < 1) {  // Pode ter injetado um usuário existente, mas a senha não conferirá devido ao hash 
       unset($_SESSION["nome_usuario"]);

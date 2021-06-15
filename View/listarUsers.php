@@ -148,7 +148,7 @@
                         <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
                     </a>
 
-                    <a href="editapessoa.php" class="text-decoration-none">
+                    <a href="editaUser.php" class="text-decoration-none">
                         <button type="button" class="btn btn-primary"><i class="fa fa-edit"></i></button>
                     </a>
 

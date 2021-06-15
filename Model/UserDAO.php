@@ -45,7 +45,7 @@ class UserDAO {
   }
   
   // consulta
-  public function Consultar($obj) {
+  public function ConsultUser($obj) {
     try {
       /* Busca pelo registro... se existir, deve trazer só uma linha,
       pois a coluna apelido é chave primária */
@@ -114,13 +114,13 @@ class UserDAO {
   public function Alterar($user)
   {
     try {
-      $stmt = $this->p->prepare("UPDATE usuario SET apelido=? WHERE id=?");
+      $stmt = $this->p->prepare("UPDATE usuario SET apelido=?, senha = md5(?) WHERE id=?");
       // Inicia a transação
       $this->p->beginTransaction();
       // Vincula um valor a um parâmetro da sentença SQL, na ordem
       $stmt->bindValue(1, $user->apelido);
       $stmt->bindValue(2, $user->senha);
-      $stmt->bindValue(6, $user->id);
+      $stmt->bindValue(3, $user->id);
 
       // Executa a query
       $stmt->execute();
@@ -166,4 +166,50 @@ class UserDAO {
       return false;
     }
   }
+
+  public function Consultar($op, $param, $value){
+    $query = "";
+    try {
+      $items = array();
+
+      switch ($op) {
+        default:
+          $query = "SELECT * FROM usuario WHERE $param = $value";
+      }
+
+      var_dump($query);
+
+      if ($query != null)
+        $stmt = $this->p->query($query);
+      else
+        $stmt = $this->p->query("SELECT * FROM usuario");
+
+      // Fecha a conexão DAO
+      $this->p = null;
+
+      // Busca a próxima linha de um conjunto de resultados
+      while ($registro = $stmt->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
+        $p = new User();
+
+        // Sempre verifica se a query SQL retornou a respectiva coluna
+        if (isset($registro["id"]))
+          $p->id = $registro["id"];
+        if (isset($registro["apelido"]))
+          $p->apelido = $registro["apelido"];
+        if (isset($registro["senha"]))
+          $p->senha = $registro["senha"];
+        
+
+        // Ao final, adiciona o registro como um item do array de retorno
+        $items[] = $p;
+      }
+
+      return $items;
+    }
+    // Em caso de erro, retorna a mensagem:
+    catch (PDOException $e) {
+      echo "Erro: " . $e->getMessage();
+    }
+  }
 }
+?>
