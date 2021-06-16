@@ -10,8 +10,8 @@
     <!-- Links de Estilo -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
-    <link href="../Include/estilosLogin.css" rel="stylesheet" />
-    <link rel="icon" type="imagem/png" href="../Include/logo.png" />
+    <link href="../CSS/estilosLogin.css" rel="stylesheet" />
+    <link rel="icon" type="imagem/png" href="../Imagens/logo.png" />
     <style>
         * {
             text-align: center;
@@ -68,7 +68,7 @@
 
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand"><img src="../Include/logo.png" alt="roupex" height="60" width="60"></a>
+            <a class="navbar-brand"><img src="../Imagens/logo.png" alt="roupex" height="60" width="60"></a>
         </div>
     </nav>
 

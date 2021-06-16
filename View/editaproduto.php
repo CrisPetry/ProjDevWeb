@@ -95,6 +95,13 @@
     .fa-edit fa {
         align-content: right;
     }
+
+    .conteiner {
+        border: 0.1rem solid transparent;
+        text-align: center;
+        width: 100%;
+        margin: auto 0;
+    }
     </style>
 </head>
 
@@ -115,94 +122,79 @@
             </form>
         </div>
     </nav>
-
     <?php
     include("../Include/SessaoValidate.php");
-    include_once("../controller/ProdutoCon.php");
-    $obj = new ProdutoCon();
-    $obj->controlaInsercao();
     ?>
 
     <div class="conteiner">
         <div class="form-group">
             <h3 style="text-align: center;">EDITAR PRODUTO</h3>
         </div>
-
-        <form id="formInserir" name="formInserir" method="POST" action="insereproduto.php">
+        <form id="formBuscar" name="formBuscar" method="post" action="editaproduto.php">
 
             <div class="form-group">
                 <div class="   col-md-6 offset-md-3">
-                    <label>DESCRIÇÃO</label>
-                    <input type="text" name="nome" id="nome" class="form-control " required>
+                    <label>BUSCAR:
+                        <input type="text" name="buscaCod" id="buscaCod" required placeholder="insira o código">
+                    </label>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa fa-search"></i></button>
+
+                </div>
+            </div>
+        </form>
+        <?php
+        function  chamaFormAlterar($codproduto, $nome, $preco, $estoque)
+        {
+        ?>
+
+        <form id="formAlterar" name="formAlterar" method="post" action="editaproduto.php"
+            onsubmit="return confirm('Deseja alterar este produto?');">
+
+            <div class="form-group">
+                <div class="col-md-6 offset-md-3">
+                    <input type="hidden" name="selCod" id="selCod" value="<?php print $codproduto; ?>">
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-6 offset-md-3">
-                    <label>PREÇO</label>
-                    <input type="text" name="preco" id="preco" class="form-control" required>
+                    <label>NOME: </label>
+                    <input type="text" name="nome" id="nome" value="<?php print $nome; ?>">
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-6 offset-md-3">
-                    <label>QUANTIDADE (somente números inteiros)</label>
-                    <input type="text" name="estoque" id="estoque" class="form-control" required>
+                    <label>PREÇO: </label>
+                    <input type="text" name="preco" id="preco" value="<?php print $preco; ?>">
                 </div>
             </div>
-
-
 
             <div class="form-group">
                 <div class="col-md-6 offset-md-3">
-                    <input type="submit" value="Inserir" class="btn btn-primary" name="button" id="button">
-                    <a href="../View/listaProduto.php">
-                        <input type="button" value="Voltar" class="btn btn-success" name="voltar" id="voltar"></a>
+                    <label>ESTOQUE: </label>
+                    <input type="text" name="estoque" id="estoque" value="<?php print $estoque; ?>">
                 </div>
             </div>
+
+            <div class="form-group">
+                <div class="col-md-6 offset-md-3">
+                    <button type="submit" class="btn btn-warning">
+                        <i class="fa fa-check"></i> Confirmar</button>
+                    </a>
+                </div>
+            </div>
+        </form>
+        <?php
+        }
+        include_once("../Controller/ProdutoCon.php");
+        $obj = new ProdutoCon();
+        $obj->controlaAlteracao();
+        ?>
+        <a href="../View/listaproduto.php">
+            <button type="button" class="btn btn-info"><i class="fa fa-arrow-left"> Voltar</i></button>
     </div>
-    </form>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
-        integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous">
-    </script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"
-        integrity="sha512-d4KkQohk+HswGs6A1d6Gak6Bb9rMWtxjOa0IiY49Q3TeFd5xAzjWXDCBW9RS7m86FQ4RzM2BdHmdJnnKRYknxw=="
-        crossorigin="anonymous"></script>
-    </div>
-
-    <script>
-    document.querySelector('#formInserir').addEventListener('submit', function(e) {
-        var form = this;
-
-        e.preventDefault();
-
-        swal({
-            title: "Salvar registro?",
-            icon: "warning",
-            buttons: [
-                'Não',
-                'Sim'
-            ],
-            dangerMode: true,
-        }).then(function(isConfirm) {
-            if (isConfirm) {
-                swal({
-                    title: 'Produto Adicionado!',
-                    icon: 'success'
-                }).then(function() {
-                    form.submit();
-                });
-            }
-        });
-    });
-    </script>
 </body>
 
 </html>

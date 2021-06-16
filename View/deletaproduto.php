@@ -89,7 +89,7 @@
                 <h3>Deleção de Produtos</h3>
                 <div class="card">
                     <label>Informe o Código:
-                        <input type="text" name="selcod" id="selcod" required>
+                        <input type="text" name="selCod" id="selCod" required>
                         <button type="submit" class="btn btn-danger">
                             <i class="fa fa-trash"></i>
                         </button>

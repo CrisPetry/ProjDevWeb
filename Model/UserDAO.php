@@ -177,8 +177,7 @@ class UserDAO {
           $query = "SELECT * FROM usuario WHERE $param = $value";
       }
 
-      var_dump($query);
-
+      
       if ($query != null)
         $stmt = $this->p->query($query);
       else

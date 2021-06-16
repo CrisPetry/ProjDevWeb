@@ -33,11 +33,11 @@ require_once("../Model/UserDAO.php");
                 if ($result) { /* Testa se a consulta retornou algum registro */
                     if ($result == -2) {
                         echo "<p align=center>USUÁRIO NÃO ENCONTRADO!</p>";
-                        echo "<a href=\"../View/UserLogin.php\"><br><img id='warning' src='../Include/exclamation.png'><br>  
+                        echo "<a href=\"../View/UserLogin.php\"><br><img id='warning' src='../Imagens/exclamation.png'><br>  
                     <button><i class='fa-arrow-left fa' aria-hidden='true'></i>&nbsp;Voltar</button></a><br>";
                     } else if ($result == -1) {
                         echo "<p>SENHA INCORRETA!</p>";
-                        echo "<a href=\"../View/UserLogin.php\"><br><img id='warning' src='../Include/exclamation.png'><br>
+                        echo "<a href=\"../View/UserLogin.php\"><br><img id='warning' src='../Imagens/exclamation.png'><br>
                     <button><i class='fa-arrow-left fa' aria-hidden='true'></i>&nbsp;Voltar</button></a><br>";
                     } else { /* Tudo certo - registrando as variáveis de sessão */
                         session_start();
@@ -143,7 +143,7 @@ require_once("../Model/UserDAO.php");
             print "</script>";
         } else {
             print "<script>";
-            print "alert('PRODUTO NÃO ENCONTRADO! Por favor, tente novamente...');";
+            print "alert('USUÁRIO NÃO ENCONTRADO! Por favor, tente novamente...');";
             print "</script>";
         }
 

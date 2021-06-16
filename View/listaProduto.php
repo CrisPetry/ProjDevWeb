@@ -141,7 +141,7 @@
                         <?php
                         include_once("../Controller/ProdutoCon.php");
                         $obj = new ProdutoCon();
-                        $obj->conConsulta(1);
+                        $obj->consultaLista(1);
                         ?>
                     </table>
                     <a href="deletaproduto.php" class="text-decoration-none">

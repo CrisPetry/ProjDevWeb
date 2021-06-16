@@ -6,43 +6,74 @@ require_once("../Model/ProdutoDAO.php");
 
 
 class ProdutoCon{
-    public function conConsulta($op){
+    public function consultaLista($op)
+    {
         $DAO = new ProdutoDAO();
         $lista = array();
         $numCol = 4;
 
-        switch($op){
+        switch ($op) {
             case 1:
                 $lista = $DAO->Consultar();
-            break;
+                break;
         }
 
-        if(count($lista)>0){
-            for($i=0; $i<count($lista); $i++){
-                $codproduto = $lista[$i]->codproduto;
+        if (count($lista) > 0) {
+            for ($i = 0; $i < count($lista); $i++) {
+                $codproduto         = $lista[$i]->codproduto;
                 $nome       = $lista[$i]->nome;
-                $preco      = $lista[$i]->preco;
-                $estoque    = $lista[$i]->estoque;
-                            
+                $preco    = $lista[$i]->preco;
+                $estoque  = $lista[$i]->estoque;
 
                 echo "<tr>";
-
-                if($codproduto)
+                if ($codproduto)
                     echo "<td style=\"text-align: center;\">$codproduto</td>";
                 if ($nome)
-                echo "<td style=\"text-align: left;\">$nome</td>";
+                    echo "<td style=\"text-align: left;\">$nome</td>";
                 if ($preco)
                     echo "<td style=\"text-align: right;\">$preco</td>";
                 if ($estoque)
-                echo "<td style=\"text-align: left;\">$estoque</td>";
-
+                    echo "<td style=\"text-align: right;\">$estoque</td>";
                 echo "</tr>";
             }
-        }
-        else{
+        } else {
             echo "<tr>";
             echo "<td colspan=\"$numCol\">Nenhum registro encontrado!</td>";
             echo "</tr>";
+        }
+    }
+
+    public function controlaConsulta($op)
+    {
+        $DAO = new ProdutoDAO();
+        $lista = array();
+        $lista = $DAO->ConsultaProd($op, "", "");
+
+        if ($op != 1)
+            $numCol = 4;
+
+        if (count($lista) > 0) {
+            for ($i = 0; $i < count($lista); $i++) {
+                $codproduto   = $lista[$i]->codproduto;
+                $nome = $lista[$i]->nome;
+                $preco  = $lista[$i]->preco;
+                $estoque = $lista[$i]->estoque;
+                
+                print "<tr>";
+                if ($codproduto)
+                    print "<td style='text-align: center;'>$codproduto</td>";
+                if ($nome)
+                    print "<td style='text-align: left;'>$nome</td>";
+                if ($preco)
+                    print "<td style='text-align: center;'>$preco</td>";
+                if ($estoque)
+                    print "<td style='text-align: center;'>$estoque</td>";
+                print "</tr>";
+            }
+        } else {
+            print "<tr>";
+            print "<td colspan='$numCol'>Nenhum registro encontrado!</td>";
+            print "</tr>";
         }
     }
 
@@ -50,14 +81,13 @@ class ProdutoCon{
     {
         $DAO = new ProdutoDAO();
 
-        $produto = $DAO->Consultar(4, "codproduto", $codproduto);
+        $produto = $DAO->ConsultaProd(4, "codproduto", $codproduto);
 
         if (count($produto) == 1) {
             $nome = $produto[0]->nome;
             $preco  = $produto[0]->preco;
             $estoque = $produto[0]->estoque;
             
-
 
             if ($modo == 0)
                 chamaFormAlterar($codproduto, $nome, $preco, $estoque);
@@ -89,7 +119,7 @@ class ProdutoCon{
         $produto->nome = $nome;
         $produto->preco = $preco;
         $produto->estoque = $estoque;
-    
+
         return $produto;
     }
 
@@ -101,7 +131,7 @@ class ProdutoCon{
 
             if ($DAO->Inserir($produto)) {
                 print "<script>";
-                print "alert('PRODUTO CADASTRADO COM SUCESSO!');";
+                print "alert('PESSOA CADASTRADO COM SUCESSO!');";
                 print "window.location = '../view/insereproduto.php';";
                 print "</script>";
             } else {
@@ -123,12 +153,12 @@ class ProdutoCon{
             $DAO  = new ProdutoDAO();
             $produto = $this->preparaDados();
 
-            $codproduto = $_POST["selcod"];
+            $codproduto = $_POST["selCod"];
             $produto->codproduto = $codproduto;
 
             if ($DAO->Alterar($produto)) {
                 print "<script>";
-                print "alert('PRODUTO ALTERADO COM SUCESSO!');";
+                print "alert('PESSOA ALTERADO COM SUCESSO!');";
                 print "document.formBuscar.buscaCod.disabled = false;";
                 print "document.formBuscar.button2.disabled  = false;";
                 print "window.location = '../view/editaproduto.php';";
@@ -149,11 +179,11 @@ class ProdutoCon{
     }
     public function controlaExclusao()
     {
-        if (isset($_POST["selcod"])) {
+        if (isset($_POST["selCod"])) {
             $DAO  = new ProdutoDAO();
             $produto = new Produto();
 
-            $codproduto = $_POST["selcod"];
+            $codproduto = $_POST["selCod"];
             $produto->codproduto = $codproduto;
 
             if ($DAO->Excluir($produto)) {

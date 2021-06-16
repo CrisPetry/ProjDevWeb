@@ -1,15 +1,18 @@
 <?php
 
-class ProdutoDAO{
+class ProdutoDAO
+{
     public $p = null;
     public $erro = null;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->p = new FabricaConexao();
     }
 
-    public function Inserir($produto){
-        try{
+    public function Inserir($produto)
+    {
+        try {
             $sql = "INSERT INTO produto (nome, preco, estoque) VALUES (?, ?, ?)";
             $stmt = $this->p->prepare($sql);
 
@@ -17,22 +20,20 @@ class ProdutoDAO{
             $stmt->bindValue(1, $produto->nome);
             $stmt->bindValue(2, $produto->preco);
             $stmt->bindValue(3, $produto->estoque);
-            
+
 
 
             $stmt->execute();
 
-            $this->p->commit(); 
-            
+            $this->p->commit();
+
             unset($this->p);
 
             return true;
-
-        }
-         catch (PDOException $e) {
+        } catch (PDOException $e) {
             $this->erro = "ERRO: " . $e->getMessage();
-               return false;
-            }  
+            return false;
+        }
     }
 
 
@@ -47,7 +48,7 @@ class ProdutoDAO{
             $stmt->bindValue(2, $produto->preco);
             $stmt->bindValue(3, $produto->estoque);
             $stmt->bindValue(4, $produto->codproduto);
-            
+
 
             // Executa a query
             $stmt->execute();
@@ -94,16 +95,17 @@ class ProdutoDAO{
     }
 
 
-    function Consultar($query=null){
-        try{
+    function Consultar($query = null)
+    {
+        try {
             $items = array();
 
-            if($query != null)
+            if ($query != null)
                 $stmt = $this->p->query($query);
             else
                 $stmt = $this->p->query("SELECT * FROM produto");
 
-            while($registro = $stmt->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)){
+            while ($registro = $stmt->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
                 $p = new Produto();
 
                 if (isset($registro["codproduto"]))
@@ -114,7 +116,7 @@ class ProdutoDAO{
                     $p->preco = $registro["preco"];
                 if (isset($registro["estoque"]))
                     $p->estoque = $registro["estoque"];
-                
+
                 // Ao final, adiciona o registro como um item do array de retorno
                 $items[] = $p;
             }
@@ -128,4 +130,48 @@ class ProdutoDAO{
             echo "Erro: " . $e->getMessage();
         }
     }
+    public function ConsultaProd($op, $param, $value){
+        $query = "";
+        try {
+            $items = array();
+
+            switch ($op) {
+                default:
+                    $query = "SELECT * FROM produto WHERE $param = $value";
+            }
+
+            if ($query != null)
+                $stmt = $this->p->query($query);
+            else
+                $stmt = $this->p->query("SELECT * FROM produto");
+
+            // Fecha a conexão DAO
+            $this->p = null;
+
+            // Busca a próxima linha de um conjunto de resultados
+            while ($registro = $stmt->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
+                $p = new Produto();
+
+                // Sempre verifica se a query SQL retornou a respectiva coluna
+                if (isset($registro["codproduto"]))
+                    $p->codproduto = $registro["codproduto"];
+                if (isset($registro["nome"]))
+                    $p->nome = $registro["nome"];
+                if (isset($registro["preco"]))
+                    $p->preco = $registro["preco"];
+                if (isset($registro["estoque"]))
+                    $p->estoque = $registro["estoque"];
+            
+                // Ao final, adiciona o registro como um item do array de retorno
+                $items[] = $p;
+            }
+
+            return $items;
+        }
+        // Em caso de erro, retorna a mensagem:
+        catch (PDOException $e) {
+            echo "Erro: " . $e->getMessage();
+        }
+    }
 }
+?>
