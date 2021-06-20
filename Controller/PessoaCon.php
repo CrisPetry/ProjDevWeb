@@ -120,7 +120,7 @@ class PessoaCon {
       print "</script>";
     } else {
       print "<script>";
-      print "alert('PRODUTO NÃO ENCONTRADO! Por favor, tente novamente...');";
+      print "alert('PESSOA NÃO ENCONTRADA! Por favor, tente novamente...');";
       print "</script>";
     }
 
@@ -155,7 +155,6 @@ class PessoaCon {
 
       if ($DAO->Inserir($pessoa)) {
         print "<script>";
-        print "alert('PESSOA CADASTRADO COM SUCESSO!');";
         print "window.location = '../view/inserepessoa.php';";
         print "</script>";
       } else {
@@ -184,7 +183,6 @@ class PessoaCon {
 
       if ($DAO->Alterar($pessoa)) {
         print "<script>";
-        print "alert('PESSOA ALTERADO COM SUCESSO!');";
         print "document.formBuscar.buscaId.disabled = false;";
         print "document.formBuscar.button2.disabled  = false;";
         print "window.location = '../view/editapessoa.php';";
@@ -216,7 +214,6 @@ class PessoaCon {
       if($DAO->Excluir($pessoa))
       {
         print "<script>";
-        print "alert('PESSOA EXCLUÍDA COM SUCESSO!');";
         print "document.formBuscar.buscaId.disabled = false;";
         print "document.formBuscar.button2.disabled  = false;";
         print "window.location = '../View/deletapessoa.php';";

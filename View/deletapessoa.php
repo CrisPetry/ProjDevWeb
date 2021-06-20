@@ -8,58 +8,105 @@
     <title>Deletar Pessoas</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../CSS/estilodelete.css">
+    <link rel="stylesheet" href="../CSS/estilopessoa.css">
     <link rel="icon" type="imagem/png" href="../Imagens/logo.png" />
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <style>
-        a {
-            text-decoration: none;
-        }
+    table {
+        border-radius: 12rem !important;
+    }
 
-        #navbar {
-            width: 100%;
-            background-color: lightblue !important;
-        }
+    table,
+    td,
+    th {
+        border: 1px solid black;
+    }
 
-        .content {
-            margin-top: 1rem;
-        }
+    th {
+        text-align: center;
+        font-weight: bold;
+    }
 
-        #idLogin {
-            font-family: 'Permanent Marker', cursive;
-            font-size: medium;
-            font-weight: 500;
-        }
+    td {
+        width: 12rem;
+        text-align: center !important;
+    }
 
-        .dropdown {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-        }
+    table {
+        margin: 0 auto;
+        border-collapse: collapse;
+    }
 
-        .dropdown:hover .dropdown-content {
-            display: block;
-            cursor: pointer;
-        }
+    a {
+        text-decoration: none;
+    }
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-        }
+    .navbar {
+        width: 100%;
+        background-color: lightblue !important;
+    }
 
-        .fa-edit fa {
-            align-content: right;
-        }
+    .content {
+        margin-top: 1rem;
+    }
+
+    #idLogin {
+        font-family: 'Permanent Marker', cursive;
+        font-size: medium;
+        font-weight: 500;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+        cursor: pointer;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    body>div>div>div.content>table>tbody>tr>td>button {
+        border: none;
+        color: #000;
+        cursor: pointer;
+        font-size: large;
+        background-color: transparent;
+    }
+
+    body>div>div>div.content>table>tbody>tr>td>button:hover {
+        text-decoration: none;
+        background-color: transparent;
+        color: black;
+    }
+
+    .fa-edit fa {
+        align-content: right;
+    }
+
+    .conteiner {
+        border: 0.1rem solid transparent;
+        text-align: center;
+        width: 100%;
+        margin: auto 0;
+    }
     </style>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-    <nav class="navbar navbar-light bg-light" id="navbar">
+    <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand"><img src="../Imagens/logo.png" alt="roupex" height="60" width="60"></a>
             <form class="d-flex">
@@ -75,84 +122,131 @@
             </form>
         </div>
     </nav>
-
     <?php
-    include("../Include/SessaoValidate.php");  // Faz a autenticação	
+    include("../Include/SessaoValidate.php");
     ?>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    </head>
 
-    <body class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <form id="formBuscar" name="formBuscar" method="post" action="deletapessoa.php">
-                <h3>Deleção de Pessoas</h3>
-                <div class="card">
-                    <label>Informe o ID:
-                        <input type="text" name="selId" id="selId" required>
-                        <button type="submit" class="btn btn-danger">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                        <a href="../View/listapessoa.php">
-                            <button type="button" class="btn btn-success"><i class="fa fa-arrow-left"></i></button>
-                        </a>
-                    </label>
-                </div>
-
-            </form>
-
-            <?php
-            /* abrindo o bloco da função que mantém oculto "formExcluir"... */
-            function  chamaFormExcluir($id, $nome, $numsoc, $endereco, $telefone, $cidade)
-            {
-            ?>
-
-                <form id="formExcluir" name="formExcluir" method="post" action="deletaproduto.php" onsubmit="return confirm('Você tem certeza que deseja excluir esta pessoa?');">
-                    <input type="hidden" name="buscaId" id="buscaId" value="<?php print $id; ?>">
-                    <p>
-                        <label>Nome da pessoa:
-                            <input type="text" name="nome" id="nome" value="<?php print $nome; ?>" readonly>
-                        </label>
-                    </p>
-                    <p>
-                        <label>CPF/CNPJ:
-                            <input type="text" name="numsoc" id="numsoc" value="<?php print $numsoc; ?>" readonly>
-                        </label>
-                    </p>
-                    <p>
-                        <label>Endereço:
-                            <input type="text" name="endereco" id="endereco" value="<?php print $endereco; ?>" readonly>
-                        </label>
-                    </p>
-                    <p>
-                        <label>Telefone:
-                            <input type="text" name="telefone" id="telefone" value="<?php print $telefone; ?>" readonly>
-                        </label>
-                    </p>
-                    <p>
-                        <label>Endereço:
-                            <input type="text" name="cidade" id="cidade" value="<?php print $cidade; ?>" readonly>
-                        </label>
-                    </p>
-                    <p>
-                        <button type="submit" class="btn btn-danger">
-                            <i class="fa fa-trash"></i> Confirma exclusão?
-                        </button>
-                    </p>
-                </form>
-
-
-            <?php
-                /* fechando o bloco da função... */
-            }
-            include_once("../Controller/PessoaCon.php");
-            $obj = new PessoaCon();
-            $obj->controlaExclusao();
-            ?>
-
-            <br>
-
+    <div class="conteiner">
+        <div class="form-group">
+            <h3 style="text-align: center;">EXCLUIR PESSOA</h3>
         </div>
-    </body>
+        <form id="formBuscar" name="formBuscar" method="post" action="deletapessoa.php">
+
+            <div class="form-group">
+                <div class="   col-md-6 offset-md-3">
+                    <label>BUSCAR:
+                        <input type="text" name="buscaId" id="buscaId" required placeholder="insira o ID">
+                    </label>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa fa-search"></i></button>
+
+                </div>
+            </div>
+        </form>
+        <?php
+        function  chamaFormExcluir($id, $nome, $numsoc, $endereco, $telefone, $cidade)
+        {
+        ?>
+
+        <form id="formExcluir" name="formAlterar" method="post" action="deletapessoa.php">
+
+            <div class="form-group">
+                <div class="col-md-6 offset-md-3">
+                    <input type="hidden" name="selId" id="selId" value="<?php print $id; ?>" readonly>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-6 offset-md-3">
+                    <label>NOME: </label>
+                    <input type="text" name="nome" id="nome" size="35" value="<?php print $nome; ?>" readonly>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-6 offset-md-3">
+                    <label>CPF/CNPJ: </label>
+                    <input type="text" name="numsoc" id="numsoc" value="<?php print $numsoc; ?>" readonly>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-6 offset-md-3">
+                    <label>ENDEREÇO: </label>
+                    <input type="text" name="endereco" id="endereco" size="35" value="<?php print $endereco; ?>"
+                        readonly>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-6 offset-md-3">
+                    <label>TELEFONE: </label>
+                    <input type="text" name="telefone" id="telefone" value="<?php print $telefone; ?>" readonly>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-6 offset-md-3">
+                    <label>CIDADE: </label>
+                    <input type="text" name="cidade" id="cidade" value="<?php print $cidade; ?>" readonly>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-6 offset-md-3">
+                    <button type="submit" class="btn btn-danger" id="submeter">
+                        <i class="fa fa-trash"></i> Excluir</button>
+                    </a>
+                </div>
+            </div>
+        </form>
+        <?php
+        }
+        include_once("../Controller/PessoaCon.php");
+        $obj = new PessoaCon();
+        $obj->controlaExclusao();
+        ?>
+        <a href="../View/listapessoa.php">
+            <button type="button" class="btn btn-info"><i class="fa fa-arrow-left"> Voltar</i></button>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+    integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous">
+</script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"
+    integrity="sha512-d4KkQohk+HswGs6A1d6Gak6Bb9rMWtxjOa0IiY49Q3TeFd5xAzjWXDCBW9RS7m86FQ4RzM2BdHmdJnnKRYknxw=="
+    crossorigin="anonymous"></script>
+
+<script>
+document.querySelector('#formExcluir').addEventListener('submit', function(e) {
+    var form = this;
+    e.preventDefault();
+    Swal.fire({
+        title: "Excluir pessoa?",
+        icon: "danger",
+        showCancelButton: true,
+        showConfirmButton: true,
+        confirmButtonColor: "#218838",
+        cancelButtonColor: "#f94848",
+    }).then(function(isConfirm) {
+        if (isConfirm) {
+            Swal.fire({
+                title: 'Pessoa Excluída!',
+                icon: 'success',
+                showConfirmButton: true,
+                confirmButtonColor: "#218838",
+            }).then(function() {
+                form.submit();
+            });
+        };
+    });
+});
+</script>
 
 </html>

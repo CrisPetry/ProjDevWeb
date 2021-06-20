@@ -148,8 +148,7 @@
         {
         ?>
 
-        <form id="formAlterar" name="formAlterar" method="post" action="editaproduto.php"
-            onsubmit="return confirm('Deseja alterar este produto?');">
+        <form id="formAlterar" name="formAlterar" method="post" action="editaproduto.php">
 
             <div class="form-group">
                 <div class="col-md-6 offset-md-3">
@@ -180,8 +179,8 @@
 
             <div class="form-group">
                 <div class="col-md-6 offset-md-3">
-                    <button type="submit" class="btn btn-warning">
-                        <i class="fa fa-check"></i> Confirmar</button>
+                    <button type="submit" class="btn btn-warning" id="submeter">
+                        <i class="fa fa-check"></i> Editar</button>
                     </a>
                 </div>
             </div>
@@ -196,5 +195,43 @@
             <button type="button" class="btn btn-info"><i class="fa fa-arrow-left"> Voltar</i></button>
     </div>
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+    integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous">
+</script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"
+    integrity="sha512-d4KkQohk+HswGs6A1d6Gak6Bb9rMWtxjOa0IiY49Q3TeFd5xAzjWXDCBW9RS7m86FQ4RzM2BdHmdJnnKRYknxw=="
+    crossorigin="anonymous"></script>
+
+<script>
+document.querySelector('#formAlterar').addEventListener('submit', function(e) {
+    var form = this;
+    e.preventDefault();
+    Swal.fire({
+        title: "Editar produto?",
+        icon: "info",
+        showCancelButton: true,
+        showConfirmButton: true,
+        confirmButtonColor: "#218838",
+        cancelButtonColor: "#f94848",
+    }).then(function(isConfirm) {
+        if (isConfirm) {
+            Swal.fire({
+                title: 'Produto Editado!',
+                icon: 'success',
+                showConfirmButton: true,
+                confirmButtonColor: "#218838",
+            }).then(function() {
+                form.submit();
+            });
+        };
+    });
+});
+</script>
 
 </html>

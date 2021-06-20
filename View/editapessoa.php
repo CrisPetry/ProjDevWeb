@@ -1,80 +1,247 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="pt-br">
 
 <head>
-    <meta charset="utf-8">
-    <title>Exercício Prático PHP+MySQL</title>
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Editar Pessoas</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../CSS/estiloproduto.css">
+    <link rel="icon" type="imagem/png" href="../Imagens/logo.png" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <style>
+        table {
+            border-radius: 12rem !important;
+        }
+
+        table,
+        td,
+        th {
+            border: 1px solid black;
+        }
+
+        th {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        td {
+            width: 12rem;
+            text-align: center !important;
+        }
+
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .navbar {
+            width: 100%;
+            background-color: lightblue !important;
+        }
+
+        .content {
+            margin-top: 1rem;
+        }
+
+        #idLogin {
+            font-family: 'Permanent Marker', cursive;
+            font-size: medium;
+            font-weight: 500;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        body>div>div>div.content>table>tbody>tr>td>button {
+            border: none;
+            color: #000;
+            cursor: pointer;
+            font-size: large;
+            background-color: transparent;
+        }
+
+        body>div>div>div.content>table>tbody>tr>td>button:hover {
+            text-decoration: none;
+            background-color: transparent;
+            color: black;
+        }
+
+        .fa-edit fa {
+            align-content: right;
+        }
+
+        .conteiner {
+            border: 0.1rem solid transparent;
+            text-align: center;
+            width: 100%;
+            margin: auto 0;
+        }
+    </style>
 </head>
 
-<body class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <h3>Editar Pessoa</h3>
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand"><img src="../Imagens/logo.png" alt="roupex" height="60" width="60"></a>
+            <form class="d-flex">
+                <i class="fa fa-user fa-lg">&nbsp;</i>
+                <div class="dropdown">
+                    <h5 id="idLogin" style="text-align: right"></h5>
+                    <div class="dropdown-content">
+                        <a href="../View/logout.php" class="btn btn-black">
+                            <i class="fa-power-off fa" aria-hidden="true"></i>
+                            Sair</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </nav>
+    <?php
+    include("../Include/SessaoValidate.php");
+    ?>
+
+    <div class="conteiner">
+        <div class="form-group">
+            <h3 style="text-align: center;">EDITAR PESSOA</h3>
+        </div>
         <form id="formBuscar" name="formBuscar" method="post" action="editapessoa.php">
-            <label>Informe o código do produto:
-                <input type="text" name="buscaId" id="buscaId" required>
-            </label>
-            <button type="submit" class="btn btn-primary">
-                <i class="fa fa-search"></i> Buscar
-            </button>
+
+            <div class="form-group">
+                <div class="   col-md-6 offset-md-3">
+                    <label>BUSCAR:
+                        <input type="text" name="buscaId" id="buscaId" required placeholder="insira o ID">
+                    </label>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa fa-search"></i></button>
+
+                </div>
+            </div>
         </form>
         <?php
-        /* abrindo o bloco da função que mantém oculto "formExcluir"... */
         function  chamaFormAlterar($id, $nome, $numsoc, $endereco, $telefone, $cidade)
         {
         ?>
 
-            <form id="formAlterar" name="formAlterar" method="post" action="editapessoa.php" onsubmit="return confirm('Você tem certeza que deseja alterar esta pessoa?');">
-                <input type="hidden" name="selId" id="selId" value="<?php print $id; ?>">
-                <p>
-                    <label>Nome da pessoa:
-                        <input type="text" name="nome" id="nome" value="<?php print $nome; ?>" >
-                    </label>
-                </p>
-                <p>
-                    <label>CPF/CNPJ:
+            <form id="formAlterar" name="formAlterar" method="post" action="editapessoa.php">
+
+                <div class="form-group">
+                    <div class="col-md-6 offset-md-3">
+                        <input type="hidden" name="selId" id="selId" value="<?php print $id; ?>">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-6 offset-md-3">
+                        <label>NOME: </label>
+                        <input type="text" name="nome" id="nome" size="35" value="<?php print $nome; ?>">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-6 offset-md-3">
+                        <label>CPF/CNPJ: </label>
                         <input type="text" name="numsoc" id="numsoc" value="<?php print $numsoc; ?>">
-                    </label>
-                </p>
-                <p>
-                    <label>Endereço:
-                        <input type="text" name="endereco" id="endereco" value="<?php print $endereco; ?>">
-                    </label>
-                </p>
-                <p>
-                    <label>Telefone:
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-6 offset-md-3">
+                        <label>ENDEREÇO: </label>
+                        <input type="text" name="endereco" id="endereco" size="35" value="<?php print $endereco; ?>">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-6 offset-md-3">
+                        <label>TELEFONE: </label>
                         <input type="text" name="telefone" id="telefone" value="<?php print $telefone; ?>">
-                    </label>
-                </p>
-                <p>
-                    <label>Endereço:
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-6 offset-md-3">
+                        <label>CIDADE: </label>
                         <input type="text" name="cidade" id="cidade" value="<?php print $cidade; ?>">
-                    </label>
-                </p>
-                <p>
-                    <button type="submit" class="btn btn-warning">
-                        <i class="fa fa-edit"></i> Confirma alteração?
-                    </button>
-                </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-6 offset-md-3">
+                        <button type="submit" class="btn btn-warning" id="submeter">
+                            <i class="fa fa-check"></i> Editar</button>
+                        </a>
+                    </div>
+                </div>
             </form>
-
-
         <?php
-            /* fechando o bloco da função... */
         }
         include_once("../Controller/PessoaCon.php");
         $obj = new PessoaCon();
         $obj->controlaAlteracao();
         ?>
-
-        <br>
         <a href="../View/listapessoa.php">
-            <button type="button" class="btn btn-success"><i class="fa fa-arrow-left"></i> Retornar para a página
-                principal</button>
-        </a>
+            <button type="button" class="btn btn-info"><i class="fa fa-arrow-left"> Voltar</i></button>
     </div>
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous">
+</script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js" integrity="sha512-d4KkQohk+HswGs6A1d6Gak6Bb9rMWtxjOa0IiY49Q3TeFd5xAzjWXDCBW9RS7m86FQ4RzM2BdHmdJnnKRYknxw==" crossorigin="anonymous"></script>
+
+<script>
+    document.querySelector('#formAlterar').addEventListener('submit', function(e) {
+        var form = this;
+        e.preventDefault();
+        Swal.fire({
+            title: "Editar pessoa?",
+            icon: "info",
+            showCancelButton: true,
+            showConfirmButton: true,
+            confirmButtonColor: "#218838",
+            cancelButtonColor: "#f94848",
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                Swal.fire({
+                    title: 'Pessoa Editada!',
+                    icon: 'success',
+                    showConfirmButton: true,
+                    confirmButtonColor: "#218838",
+                }).then(function() {
+                    form.submit();
+                });
+            };
+        });
+    });
+</script>
 
 </html>

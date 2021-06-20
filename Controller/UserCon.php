@@ -202,18 +202,12 @@ require_once("../Model/UserDAO.php");
 
             $DAO = new UserDAO();
             $result = $DAO->Inserir($user);
-            if ($result == 1) {
-                $res = "Usuário Adicionado";
-                header("Location: ../view/createUser.php?result=$res");
-            } else if ($result == -1) {
+            
+            if ($result == -1) {
                 $erros[] = "Usuário já cadastrado!";
                 $err = serialize($erros);
                 header("Location: ../view/createUser.php?error=$err");
-            } else {
-                $erros[] = "ERRO NO BANCO DE DADOS: $DAO->erro";
-                $err = serialize($erros);
-                header("Location: ../view/createUser.php?error$err");
-            }
+            } 
             unset($user);
         }
     }
@@ -229,7 +223,6 @@ require_once("../Model/UserDAO.php");
 
             if ($DAO->Alterar($user)) {
                 print "<script>";
-                print "alert('USUÁRIO ALTERADO COM SUCESSO!');";
                 print "document.formBuscar.buscaId.disabled = false;";
                 print "document.formBuscar.button2.disabled  = false;";
                 print "window.location = '../view/editauser.php';";
@@ -259,7 +252,6 @@ require_once("../Model/UserDAO.php");
 
             if ($DAO->Excluir($user)) {
                 print "<script>";
-                print "alert('USUÁRIO EXCLUÍDO COM SUCESSO!');";
                 print "document.formBuscar.buscaId.disabled = false;";
                 print "document.formBuscar.button2.disabled  = false;";
                 print "window.location = '../View/deletaUser.php';";

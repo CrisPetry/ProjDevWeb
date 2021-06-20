@@ -8,38 +8,12 @@
     <title>Inserir Produtos</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../CSS/estiloproduto.css">
+    <link rel="stylesheet" href="../CSS/estilocadastrar.css">
     <link rel="icon" type="imagem/png" href="../Imagens/logo.png" />
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
     <style>
-    table {
-        border-radius: 12rem !important;
-    }
-
-    table,
-    td,
-    th {
-        border: 1px solid black;
-    }
-
-    th {
-        text-align: center;
-        font-weight: bold;
-    }
-
-    td {
-        width: 12rem;
-        text-align: center !important;
-    }
-
-    table {
-        margin: 0 auto;
-        border-collapse: collapse;
-    }
-
     a {
         text-decoration: none;
     }
@@ -78,20 +52,6 @@
         z-index: 1;
     }
 
-    body>div>div>div.content>table>tbody>tr>td>button {
-        border: none;
-        color: #000;
-        cursor: pointer;
-        font-size: large;
-        background-color: transparent;
-    }
-
-    body>div>div>div.content>table>tbody>tr>td>button:hover {
-        text-decoration: none;
-        background-color: transparent;
-        color: black;
-    }
-
     .fa-edit fa {
         align-content: right;
     }
@@ -117,8 +77,8 @@
     </nav>
 
     <?php
-    include("../Include/SessaoValidate.php");
-    include_once("../controller/ProdutoCon.php");
+    include("../Include/SessaoValidate.php");  // Faz a autenticação
+    include_once("../Controller/ProdutoCon.php");
     $obj = new ProdutoCon();
     $obj->controlaInsercao();
     ?>
@@ -132,7 +92,7 @@
 
             <div class="form-group">
                 <div class="   col-md-6 offset-md-3">
-                    <label>DESCRIÇÃO</label>
+                    <label>NOME</label>
                     <input type="text" name="nome" id="nome" class="form-control " required>
                 </div>
             </div>
@@ -146,16 +106,14 @@
 
             <div class="form-group">
                 <div class="col-md-6 offset-md-3">
-                    <label>QUANTIDADE (somente números inteiros)</label>
+                    <label>ESTOQUE</label>
                     <input type="text" name="estoque" id="estoque" class="form-control" required>
                 </div>
             </div>
 
-
-
             <div class="form-group">
                 <div class="col-md-6 offset-md-3">
-                    <input type="submit" value="Inserir" class="btn btn-primary" name="button" id="button">
+                    <input type="submit" value="Enviar" class="btn btn-primary" name="button" id="button">
                     <a href="../View/listaProduto.php">
                         <input type="button" value="Voltar" class="btn btn-success" name="voltar" id="voltar"></a>
                 </div>
@@ -170,39 +128,41 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
         integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous">
     </script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/imask"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"
         integrity="sha512-d4KkQohk+HswGs6A1d6Gak6Bb9rMWtxjOa0IiY49Q3TeFd5xAzjWXDCBW9RS7m86FQ4RzM2BdHmdJnnKRYknxw=="
         crossorigin="anonymous"></script>
     </div>
 
+
     <script>
     document.querySelector('#formInserir').addEventListener('submit', function(e) {
         var form = this;
-
         e.preventDefault();
-
-        swal({
-            title: "Salvar registro?",
-            icon: "warning",
-            buttons: [
-                'Não',
-                'Sim'
-            ],
-            dangerMode: true,
+        Swal.fire({
+            title: "Adicionar produto?",
+            icon: "info",
+            showCancelButton: true,
+            showConfirmButton: true,
+            confirmButtonColor: "#218838",
+            cancelButtonColor: "#f94848",
         }).then(function(isConfirm) {
             if (isConfirm) {
-                swal({
+                Swal.fire({
                     title: 'Produto Adicionado!',
-                    icon: 'success'
+                    icon: 'success',
+                    showConfirmButton: true,
+                    confirmButtonColor: "#218838",
                 }).then(function() {
                     form.submit();
                 });
-            }
+            };
         });
     });
     </script>
+
 </body>
 
 </html>

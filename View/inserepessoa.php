@@ -13,7 +13,7 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<style>
+    <style>
     a {
         text-decoration: none;
     }
@@ -142,8 +142,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
         integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous">
     </script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/imask"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"
         integrity="sha512-d4KkQohk+HswGs6A1d6Gak6Bb9rMWtxjOa0IiY49Q3TeFd5xAzjWXDCBW9RS7m86FQ4RzM2BdHmdJnnKRYknxw=="
         crossorigin="anonymous"></script>
@@ -153,42 +154,45 @@
 
     <script>
     $(document).ready(function() {
-        $("#telefone").mask("(99)99999-9999");
+        $("#telefone").mask("(99) 99999-9999");
     });
     </script>
 
     <script>
-    var tamanho = $("#numsoc").val().length;
-    if (tamanho < 11) {
-        $("#numsoc").mask("999.999.999-99");
-    } else {
-        $("#numsoc").mask("99.999.999/9999-99");
-    }
+    var maskCpfOuCnpj = IMask(document.getElementById('numsoc'), {
+        mask: [{
+                mask: '000.000.000-00',
+                maxLength: 11
+            },
+            {
+                mask: '00.000.000/0000-00'
+            }
+        ]
+    });
     </script>
 
     <script>
     document.querySelector('#formInserir').addEventListener('submit', function(e) {
         var form = this;
-
         e.preventDefault();
-
-        swal({
-            title: "Salvar registro?",
-            icon: "warning",
-            buttons: [
-                'Não',
-                'Sim'
-            ],
-            dangerMode: true,
+        Swal.fire({
+            title: "Adicionar pessoa?",
+            icon: "info",
+            showCancelButton: true,
+            showConfirmButton: true,
+            confirmButtonColor: "#218838",
+            cancelButtonColor: "#f94848",
         }).then(function(isConfirm) {
             if (isConfirm) {
-                swal({
-                    title: 'Pessoa Adicionado!',
-                    icon: 'success'
+                Swal.fire({
+                    title: 'Pessoa Adicionada!',
+                    icon: 'success',
+                    showConfirmButton: true,
+                    confirmButtonColor: "#218838",
                 }).then(function() {
                     form.submit();
                 });
-            }
+            };
         });
     });
     </script>

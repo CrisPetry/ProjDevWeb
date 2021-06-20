@@ -93,7 +93,6 @@ class PessoaDAO{
             $stmt->bindValue(6, $pessoa->id);
 
             // Executa a query
-            var_dump($stmt);
             $stmt->execute();
 
             // Grava a transação
@@ -148,8 +147,6 @@ class PessoaDAO{
         default:
           $query = "SELECT * FROM pessoa WHERE $param = $value";
       }
-
-      var_dump($query);
 
       if ($query != null)
         $stmt = $this->p->query($query);

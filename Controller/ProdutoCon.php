@@ -131,7 +131,6 @@ class ProdutoCon{
 
             if ($DAO->Inserir($produto)) {
                 print "<script>";
-                print "alert('PESSOA CADASTRADO COM SUCESSO!');";
                 print "window.location = '../view/insereproduto.php';";
                 print "</script>";
             } else {
@@ -158,7 +157,6 @@ class ProdutoCon{
 
             if ($DAO->Alterar($produto)) {
                 print "<script>";
-                print "alert('PESSOA ALTERADO COM SUCESSO!');";
                 print "document.formBuscar.buscaCod.disabled = false;";
                 print "document.formBuscar.button2.disabled  = false;";
                 print "window.location = '../view/editaproduto.php';";
@@ -188,7 +186,6 @@ class ProdutoCon{
 
             if ($DAO->Excluir($produto)) {
                 print "<script>";
-                print "alert('PRODUTO EXCLUÍDO COM SUCESSO!');";
                 print "document.formBuscar.buscaCod.disabled = false;";
                 print "document.formBuscar.button2.disabled  = false;";
                 print "window.location = '../View/deletaproduto.php';";
