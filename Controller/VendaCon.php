@@ -9,32 +9,32 @@ require_once("../Model/ProdutoDAO.php");
 require_once("../Model/User.php");
 require_once("../Model/UserDAO.php");
 
-class VendaCon {
+class VendaCon
+{
 
-  public function listaPessoasFK($selectedIndex=-1) {
+  public function listaPessoasFK($selectedIndex = -1)
+  {
     $DAO = new PessoaDAO();
     $lista = array();
     $lista = $DAO->ConsultarList();
     $resultOptions = "";
 
-    if($selectedIndex != -1)
-      $selectedIndex--;  
-  
-    if(count($lista) > 0) {
-      for($i = 0; $i < count($lista); $i++) {
-        if($i != $selectedIndex){
-          
+    if ($selectedIndex != -1)
+      $selectedIndex--;
+
+    if (count($lista) > 0) {
+      for ($i = 0; $i < count($lista); $i++) {
+        if ($i != $selectedIndex) {
+
           $resultOptions .= "<option value=\"" . $lista[$i]->id . "\">" . $lista[$i]->nome . "</option>" . "\n";
-        }
-        else {
+        } else {
           $resultOptions .= "<option selected value=\"" . $lista[$i]->id . "\">" . $lista[$i]->nome . "</option>" . "\n";
         }
       }
-    }
-    else {
+    } else {
       $resultOptions .= "<option value=''></option>\n";
     }
-    
+
     return $resultOptions;
   }
 
@@ -54,13 +54,13 @@ class VendaCon {
 
           $resultOptions .= "<option value=\"" . $lista[$i]->codproduto . "\">" . $lista[$i]->descricao . "</option>" . "\n";
         } else {
-          
+
           $resultOptions .= "<option selected value=\"" . $lista[$i]->codproduto . "\">" . $lista[$i]->descricao . "</option>" . "\n";
           $selectedIndex++;
         }
       }
     } else {
-     
+
       $resultOptions .= "<option value=''></option>\n";
     }
     return $resultOptions;
@@ -82,15 +82,15 @@ class VendaCon {
 
           $resultOptions .= "<option value=\"" . $lista[$i]->id . "\">" . $lista[$i]->apelido . "</option>" . "\n";
         } else {
-          
+
           $resultOptions .= "<option selected value=\"" . $lista[$i]->id . "\">" . $lista[$i]->apelido . "</option>" . "\n";
         }
       }
     } else {
-      
+
       $resultOptions .= "<option value=''></option>\n";
     }
-    
+
     return $resultOptions;
   }
 
@@ -130,8 +130,10 @@ class VendaCon {
 
   public function controlaInsercao()
   {
-    if (isset($_POST["data"]) && isset($_POST["valortotal"]) && isset($_POST["cliente"])
-    && isset($_POST["produto"]) && isset($_POST["vendedor"])) {
+    if (
+      isset($_POST["data"]) && isset($_POST["valortotal"]) && isset($_POST["cliente"])
+      && isset($_POST["produto"]) && isset($_POST["vendedor"])
+    ) {
       $erros = array();
       $data = $_POST["data"];
       $valortotal = $_POST["valortotal"];
@@ -197,9 +199,9 @@ class VendaCon {
         if ($cliente)
           echo "<td style=\"text-align: left;\">$cliente</td>";
         if ($produto)
-        echo "<td style=\"text-align: left;\">$produto</td>";
+          echo "<td style=\"text-align: left;\">$produto</td>";
         if ($vendedor)
-        echo "<td style=\"text-align: left;\">$vendedor</td>";
+          echo "<td style=\"text-align: left;\">$vendedor</td>";
 
         echo "</tr>";
       }
@@ -212,18 +214,20 @@ class VendaCon {
 
   public function controlaAlteracao()
   {
-    if(isset($_POST["data"]) && isset($_POST["valortotal"]) && isset($_POST["cliente"])
-    && isset($_POST["produto"]) && isset($_POST["vendedor"]) && isset($_POST["selCod"])) {
+    if (
+      isset($_POST["data"]) && isset($_POST["valortotal"]) && isset($_POST["cliente"])
+      && isset($_POST["produto"]) && isset($_POST["vendedor"]) && isset($_POST["selCod"])
+    ) {
       $erros = array();
       $data = $_POST["data"];
       $valortotal = $_POST["valortotal"];
       $cliente = $_POST["cliente"];
       $produto = $_POST["produto"];
       $vendedor = $_POST["vendedor"];
-      $codvenda = $_POST["selCod"];      
-      
-    
-      if(count($erros) == 0) {
+      $codvenda = $_POST["selCod"];
+
+
+      if (count($erros) == 0) {
         $DAO = new VendaDAO();
         $venda = new Venda();
         $venda->data = $data;
@@ -231,60 +235,49 @@ class VendaCon {
         $venda->codpessoa = $cliente;
         $venda->codproduto = $produto;
         $venda->id = $vendedor;
-        $venda->codvenda = $codvenda;        
+        $venda->codvenda = $codvenda;
 
-        if($DAO->Alterar($venda)) {
+        if ($DAO->Alterar($venda)) {
           $res = "VENDA ALTERADA COM SUCESSO!";
           header("Location: ../view/alteravenda.php?resultMode=$res");
-        }
-        else
-        {
+        } else {
           $erros[] = "ERRO NO BANCO DE DADOS: $DAO->erro";
           $err = serialize($erros);
-          header("Location: ../view/alteravenda.php?errorMode=$err&codvenda=$codvenda");          
+          header("Location: ../view/alteravenda.php?errorMode=$err&codvenda=$codvenda");
         }
-      
+
         unset($venda);
-      }
-      else {
+      } else {
         $err = serialize($erros);  // Caso tenha erro no preenchimento do formulário
         header("Location: ../view/alteravenda.php?errorMode=$err&codvenda=$codvenda");
       }
-    }
-    else if(isset($_POST["buscaCod"]))
-    {
+    } else if (isset($_POST["buscaCod"])) {
       $codvenda = $_POST["buscaCod"];
       $this->buscaDados($codvenda, 0);  // chamaFormAlterar
     }
   }
-  
+
   public function controlaExclusao()
   {
-    if(isset($_POST["selCod"]))
-    {
+    if (isset($_POST["selCod"])) {
       $DAO = new VendaDAO();
       $venda  = new Venda();
 
       $codvenda = $_POST["selCod"];
       $venda->codvenda = $codvenda;
 
-      if($DAO->Excluir($venda)) {
+      if ($DAO->Excluir($venda)) {
         $res = "VENDA EXCLUÍDO COM SUCESSO!";
-      }
-      else
-      {
+      } else {
         $erros[] = "ERRO NO BANCO DE DADOS: $DAO->erro";
         $err = serialize($erros);
-        header("Location: ../view/deletavenda.php?errorMode=$err&codvenda=$codvenda");          
+        header("Location: ../view/deletavenda.php?errorMode=$err&codvenda=$codvenda");
       }
-      
+
       unset($venda);
-    }
-    else if(isset($_POST["buscaCod"]))
-    {
+    } else if (isset($_POST["buscaCod"])) {
       $id = $_POST["buscaCod"];
       $this->buscaDados($id, 1);  // chamaFormExcluir
     }
   }
-
 }

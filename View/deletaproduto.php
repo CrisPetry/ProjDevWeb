@@ -144,7 +144,7 @@
             </div>
         </form>
         <?php
-        function  chamaFormExcluir($codproduto, $descricao, $preco, $estoque)
+        function  chamaFormExcluir($codproduto, $descricao, $estoque)
         {
         ?>
 
@@ -160,13 +160,6 @@
                 <div class="col-md-6 offset-md-3">
                     <label>DESCRIÇÃO: </label>
                     <input type="text" name="descricao" id="descricao" size="35" value="<?php print $descricao; ?>" readonly>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-6 offset-md-3">
-                    <label>PREÇO: </label>
-                    <input type="text" name="preco" id="preco" value="<?php print $preco; ?>" readonly>
                 </div>
             </div>
 
