@@ -13,11 +13,11 @@ class ProdutoDAO
     public function Inserir($produto)
     {
         try {
-            $sql = "INSERT INTO produto (nome, preco, estoque) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO produto (descricao, preco, estoque) VALUES (?, ?, ?)";
             $stmt = $this->p->prepare($sql);
 
             $this->p->beginTransaction();
-            $stmt->bindValue(1, $produto->nome);
+            $stmt->bindValue(1, $produto->descricao);
             $stmt->bindValue(2, $produto->preco);
             $stmt->bindValue(3, $produto->estoque);
 
@@ -40,11 +40,11 @@ class ProdutoDAO
     public function Alterar($produto)
     {
         try {
-            $stmt = $this->p->prepare("UPDATE produto SET nome=?, preco=?, estoque=? WHERE codproduto=?");
+            $stmt = $this->p->prepare("UPDATE produto SET descricao=?, preco=?, estoque=? WHERE codproduto=?");
             // Inicia a transação
             $this->p->beginTransaction();
             // Vincula um valor a um parâmetro da sentença SQL, na ordem
-            $stmt->bindValue(1, $produto->nome);
+            $stmt->bindValue(1, $produto->descricao);
             $stmt->bindValue(2, $produto->preco);
             $stmt->bindValue(3, $produto->estoque);
             $stmt->bindValue(4, $produto->codproduto);
@@ -110,8 +110,8 @@ class ProdutoDAO
 
                 if (isset($registro["codproduto"]))
                     $p->codproduto = $registro["codproduto"];
-                if (isset($registro["nome"]))
-                    $p->nome = $registro["nome"];
+                if (isset($registro["descricao"]))
+                    $p->descricao = $registro["descricao"];
                 if (isset($registro["preco"]))
                     $p->preco = $registro["preco"];
                 if (isset($registro["estoque"]))
@@ -155,8 +155,8 @@ class ProdutoDAO
                 // Sempre verifica se a query SQL retornou a respectiva coluna
                 if (isset($registro["codproduto"]))
                     $p->codproduto = $registro["codproduto"];
-                if (isset($registro["nome"]))
-                    $p->nome = $registro["nome"];
+                if (isset($registro["descricao"]))
+                    $p->descricao = $registro["descricao"];
                 if (isset($registro["preco"]))
                     $p->preco = $registro["preco"];
                 if (isset($registro["estoque"]))

@@ -21,15 +21,15 @@ class ProdutoCon{
         if (count($lista) > 0) {
             for ($i = 0; $i < count($lista); $i++) {
                 $codproduto         = $lista[$i]->codproduto;
-                $nome       = $lista[$i]->nome;
+                $descricao       = $lista[$i]->descricao;
                 $preco    = $lista[$i]->preco;
                 $estoque  = $lista[$i]->estoque;
 
                 echo "<tr>";
                 if ($codproduto)
                     echo "<td style=\"text-align: center;\">$codproduto</td>";
-                if ($nome)
-                    echo "<td style=\"text-align: left;\">$nome</td>";
+                if ($descricao)
+                    echo "<td style=\"text-align: left;\">$descricao</td>";
                 if ($preco)
                     echo "<td style=\"text-align: right;\">$preco</td>";
                 if ($estoque)
@@ -55,15 +55,15 @@ class ProdutoCon{
         if (count($lista) > 0) {
             for ($i = 0; $i < count($lista); $i++) {
                 $codproduto   = $lista[$i]->codproduto;
-                $nome = $lista[$i]->nome;
+                $descricao = $lista[$i]->descricao;
                 $preco  = $lista[$i]->preco;
                 $estoque = $lista[$i]->estoque;
                 
                 print "<tr>";
                 if ($codproduto)
                     print "<td style='text-align: center;'>$codproduto</td>";
-                if ($nome)
-                    print "<td style='text-align: left;'>$nome</td>";
+                if ($descricao)
+                    print "<td style='text-align: left;'>$descricao</td>";
                 if ($preco)
                     print "<td style='text-align: center;'>$preco</td>";
                 if ($estoque)
@@ -84,15 +84,15 @@ class ProdutoCon{
         $produto = $DAO->ConsultaProd(4, "codproduto", $codproduto);
 
         if (count($produto) == 1) {
-            $nome = $produto[0]->nome;
+            $descricao = $produto[0]->descricao;
             $preco  = $produto[0]->preco;
             $estoque = $produto[0]->estoque;
             
 
             if ($modo == 0)
-                chamaFormAlterar($codproduto, $nome, $preco, $estoque);
+                chamaFormAlterar($codproduto, $descricao, $preco, $estoque);
             else
-                chamaFormExcluir($codproduto, $nome, $preco, $estoque);
+                chamaFormExcluir($codproduto, $descricao, $preco, $estoque);
 
             print "<script>";
             print "document.formBuscar.buscaCod.value = '$codproduto';";
@@ -112,11 +112,11 @@ class ProdutoCon{
     {
         $produto = new Produto();
 
-        $nome = $_POST["nome"];
+        $descricao = $_POST["descricao"];
         $preco  = $_POST["preco"];
         $estoque = $_POST["estoque"];
 
-        $produto->nome = $nome;
+        $produto->descricao = $descricao;
         $produto->preco = $preco;
         $produto->estoque = $estoque;
 
@@ -125,7 +125,7 @@ class ProdutoCon{
 
     public function controlaInsercao()
     {
-        if (isset($_POST["nome"]) && isset($_POST["preco"]) && isset($_POST["estoque"])) {
+        if (isset($_POST["descricao"]) && isset($_POST["preco"]) && isset($_POST["estoque"])) {
             $DAO  = new ProdutoDAO();
             $produto = $this->preparaDados();
 
@@ -136,7 +136,7 @@ class ProdutoCon{
             } else {
                 print "<script>";
                 print "alert('Registro NÃO CADASTRADO! ERRO: $DAO->erro');";
-                print "document.getElementById('nome').value = '$produto->nome';";
+                print "document.getElementById('descricao').value = '$produto->descricao';";
                 print "document.getElementById('preco').value = '$produto->preco';";
                 print "document.getElementById('estoque').value = '$produto->estoque';";
                 print "</script>";
@@ -148,7 +148,7 @@ class ProdutoCon{
 
     public function controlaAlteracao()
     {
-        if (isset($_POST["nome"]) && isset($_POST["preco"]) && isset($_POST["estoque"])) {
+        if (isset($_POST["descricao"]) && isset($_POST["preco"]) && isset($_POST["estoque"])) {
             $DAO  = new ProdutoDAO();
             $produto = $this->preparaDados();
 

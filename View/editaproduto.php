@@ -144,7 +144,7 @@
             </div>
         </form>
         <?php
-        function  chamaFormAlterar($codproduto, $nome, $preco, $estoque)
+        function  chamaFormAlterar($codproduto, $descricao, $preco, $estoque)
         {
         ?>
 
@@ -158,8 +158,8 @@
 
             <div class="form-group">
                 <div class="col-md-6 offset-md-3">
-                    <label>NOME: </label>
-                    <input type="text" name="nome" id="nome" value="<?php print $nome; ?>">
+                    <label>DESCRIÇÃO: </label>
+                    <input type="text" name="descricao" id="descricao" value="<?php print $descricao; ?>">
                 </div>
             </div>
 

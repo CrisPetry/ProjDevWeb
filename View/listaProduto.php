@@ -121,7 +121,7 @@
         </div>
     </nav>
     <?php
-    include("../include/SessaoValidate.php");  // Faz a autenticação
+    include("../include/SessaoValidate.php"); 
     ?>
     <div class="card-body">
         <div class="jumbotron">
@@ -132,8 +132,8 @@
                         <thead>
                             <tr>
                                 <th>Código</th>
-                                <th>Nome</th>
-                                <th>Preço</th>
+                                <th>Descrição</th>
+                                <th>Preço R$</th>
                                 <th>Estoque</th>
                             </tr>
                         </thead>

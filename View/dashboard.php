@@ -109,7 +109,7 @@
         <div class="container">
             <div class="row mbr-justify-content-center">
                 <div class="col-lg-6 mbr-col-md-10">
-                    <a href="login.html">
+                    <a href="../View/listavenda.php ">
                         <div class="wrap">
                             <div class="ico-wrap">
                                 <span class="mbr-iconfont fa-dollar fa"></span>

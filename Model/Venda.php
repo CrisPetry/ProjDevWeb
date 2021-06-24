@@ -1,13 +1,13 @@
 <?php
 
-class Pessoa{
-    private $id;
-    private $nome;
-    private $numsoc;
-    private $endereco;
-    private $telefone;
-    private $cidade;
-   
+class Venda {
+  private $codvenda;
+  private $data;
+  private $valortotal;
+  private $codpessoa;
+  private $codproduto;
+  private $id;
+
     public function __set($propriedade, $valor){
         $this->$propriedade = $valor;
     }
@@ -15,7 +15,4 @@ class Pessoa{
     public function __get($propriedade){
         return $this->$propriedade;
     }
-
 }
-
-?>

@@ -120,7 +120,7 @@
 
             <div class="form-group">
                 <div class="col-md-6 offset-md-3">
-                    <label>CIDADE</label>
+                    <label>CIDADE/UF</label>
                     <input type="text" name="cidade" id="cidade" class="form-control" required>
                 </div>
             </div>
