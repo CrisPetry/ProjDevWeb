@@ -99,13 +99,6 @@
 
             <div class="form-group">
                 <div class="col-md-6 offset-md-3">
-                    <label>PREÇO</label>
-                    <input type="text" name="preco" id="preco" class="form-control" required>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-6 offset-md-3">
                     <label>ESTOQUE</label>
                     <input type="text" name="estoque" id="estoque" class="form-control" required>
                 </div>

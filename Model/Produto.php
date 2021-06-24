@@ -3,7 +3,6 @@
 class Produto{
     private $codproduto;
     private $nome;
-    private $preco;
     private $estoque;
  
    

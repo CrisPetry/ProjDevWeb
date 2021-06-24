@@ -133,7 +133,6 @@
                             <tr>
                                 <th>Código</th>
                                 <th>Descrição</th>
-                                <th>Preço R$</th>
                                 <th>Estoque</th>
                             </tr>
                         </thead>

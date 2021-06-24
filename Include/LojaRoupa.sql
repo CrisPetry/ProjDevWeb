@@ -3,14 +3,12 @@ id 	        	serial 		    not null,
 apelido        	text         	not null,
 senha          	char(32)  		not null,
  
-
 primary key (id)
 );
 
 CREATE TABLE PRODUTO(
 codProduto	serial		not null,
 descricao	text		not null,
-preco		float		not null,
 estoque	    integer 	not null,
 
 primary key (codProduto)

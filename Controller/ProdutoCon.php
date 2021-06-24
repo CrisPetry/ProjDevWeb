@@ -10,7 +10,7 @@ class ProdutoCon{
     {
         $DAO = new ProdutoDAO();
         $lista = array();
-        $numCol = 4;
+        $numCol = 3;
 
         switch ($op) {
             case 1:
@@ -20,18 +20,15 @@ class ProdutoCon{
 
         if (count($lista) > 0) {
             for ($i = 0; $i < count($lista); $i++) {
-                $codproduto         = $lista[$i]->codproduto;
+                $codproduto      = $lista[$i]->codproduto;
                 $descricao       = $lista[$i]->descricao;
-                $preco    = $lista[$i]->preco;
-                $estoque  = $lista[$i]->estoque;
+                $estoque         = $lista[$i]->estoque;
 
                 echo "<tr>";
                 if ($codproduto)
                     echo "<td style=\"text-align: center;\">$codproduto</td>";
                 if ($descricao)
                     echo "<td style=\"text-align: left;\">$descricao</td>";
-                if ($preco)
-                    echo "<td style=\"text-align: right;\">$preco</td>";
                 if ($estoque)
                     echo "<td style=\"text-align: right;\">$estoque</td>";
                 echo "</tr>";
@@ -50,13 +47,12 @@ class ProdutoCon{
         $lista = $DAO->ConsultaProd($op, "", "");
 
         if ($op != 1)
-            $numCol = 4;
+            $numCol = 3;
 
         if (count($lista) > 0) {
             for ($i = 0; $i < count($lista); $i++) {
                 $codproduto   = $lista[$i]->codproduto;
                 $descricao = $lista[$i]->descricao;
-                $preco  = $lista[$i]->preco;
                 $estoque = $lista[$i]->estoque;
                 
                 print "<tr>";
@@ -64,8 +60,6 @@ class ProdutoCon{
                     print "<td style='text-align: center;'>$codproduto</td>";
                 if ($descricao)
                     print "<td style='text-align: left;'>$descricao</td>";
-                if ($preco)
-                    print "<td style='text-align: center;'>$preco</td>";
                 if ($estoque)
                     print "<td style='text-align: center;'>$estoque</td>";
                 print "</tr>";
@@ -81,18 +75,17 @@ class ProdutoCon{
     {
         $DAO = new ProdutoDAO();
 
-        $produto = $DAO->ConsultaProd(4, "codproduto", $codproduto);
+        $produto = $DAO->ConsultaProd(3, "codproduto", $codproduto);
 
         if (count($produto) == 1) {
             $descricao = $produto[0]->descricao;
-            $preco  = $produto[0]->preco;
             $estoque = $produto[0]->estoque;
             
 
             if ($modo == 0)
-                chamaFormAlterar($codproduto, $descricao, $preco, $estoque);
+                chamaFormAlterar($codproduto, $descricao, $estoque);
             else
-                chamaFormExcluir($codproduto, $descricao, $preco, $estoque);
+                chamaFormExcluir($codproduto, $descricao, $estoque);
 
             print "<script>";
             print "document.formBuscar.buscaCod.value = '$codproduto';";
@@ -113,11 +106,9 @@ class ProdutoCon{
         $produto = new Produto();
 
         $descricao = $_POST["descricao"];
-        $preco  = $_POST["preco"];
         $estoque = $_POST["estoque"];
 
         $produto->descricao = $descricao;
-        $produto->preco = $preco;
         $produto->estoque = $estoque;
 
         return $produto;
@@ -125,7 +116,7 @@ class ProdutoCon{
 
     public function controlaInsercao()
     {
-        if (isset($_POST["descricao"]) && isset($_POST["preco"]) && isset($_POST["estoque"])) {
+        if (isset($_POST["descricao"]) && isset($_POST["estoque"])) {
             $DAO  = new ProdutoDAO();
             $produto = $this->preparaDados();
 
@@ -137,7 +128,6 @@ class ProdutoCon{
                 print "<script>";
                 print "alert('Registro NÃO CADASTRADO! ERRO: $DAO->erro');";
                 print "document.getElementById('descricao').value = '$produto->descricao';";
-                print "document.getElementById('preco').value = '$produto->preco';";
                 print "document.getElementById('estoque').value = '$produto->estoque';";
                 print "</script>";
             }
@@ -148,7 +138,7 @@ class ProdutoCon{
 
     public function controlaAlteracao()
     {
-        if (isset($_POST["descricao"]) && isset($_POST["preco"]) && isset($_POST["estoque"])) {
+        if (isset($_POST["descricao"]) && isset($_POST["estoque"])) {
             $DAO  = new ProdutoDAO();
             $produto = $this->preparaDados();
 
