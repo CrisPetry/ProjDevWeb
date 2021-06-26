@@ -98,15 +98,15 @@ class VendaCon
   {
     $DAO = new VendaDAO();
 
-    $venda = $DAO->ConsultarP(6, "codvenda", $codvenda);
+    $venda = $DAO->Consultar(2, $codvenda);
 
     if (count($venda) == 1) {
-      $codvenda = $venda[0]->codvenda;
-      $data = $venda[0]->data;
+      $codvenda    = $venda[0]->codvenda;
+      $data        = $venda[0]->data;
       $valortotal  = $venda[0]->valortotal;
-      $cliente   = $venda[0]->codpessoa;
-      $produto = $venda[0]->codproduto;
-      $vendedor = $venda[0]->id;
+      $cliente     = $venda[0]->codpessoa;
+      $produto     = $venda[0]->codproduto;
+      $vendedor    = $venda[0]->id;
 
 
       if ($modo == 0)
@@ -151,18 +151,20 @@ class VendaCon
         $venda->id = $vendedor;
 
         if ($DAO->Inserir($venda)) {
-          $res = "CARRO CADASTRADO COM SUCESSO!";
-          header("Location: ../view/inserecarro.php?result=$res");
+          print "<script>";
+          print "window.location = '../view/inserevenda.php';";
+          print "</script>";
         } else {
-          $erros[] = "ERRO NO BANCO DE DADOS: $DAO->erro";
-          $err = serialize($erros);
+          print "<script>";
+          print "alert('Registro NÃO CADASTRADO! ERRO: $DAO->erro');";
+          print "document.getElementById('data').value = '$venda->data';";
+          print "document.getElementById('valortotal').value = '$venda->valortotal';";
+          print "</script>";
         }
 
         unset($venda);
       } else {
-        $err = serialize($erros);
-        header("Location: ../view/inserevenda.php?error=$err&data=$data&valortotal=$valortotal&cliente=$cliente
-          &produto=$produto&vendedor=$vendedor");
+        header("Location: ../view/inserevenda.php");
       }
     }
   }

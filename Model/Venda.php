@@ -6,7 +6,7 @@ class Venda {
   private $valortotal;
   private $codpessoa;
   private $codproduto;
-  private $id;
+  private $codusuario;
 
     public function __set($propriedade, $valor){
         $this->$propriedade = $valor;

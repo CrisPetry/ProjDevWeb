@@ -13,6 +13,8 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
     <style>
         a {
             text-decoration: none;
@@ -90,27 +92,27 @@
             <div class="form-group">
                 <div class="   col-md-6 offset-md-3">
                     <label>DATA</label>
-                    <input type="text" size="20" name="data" id="data" class="form-control " required>
+                    <input type="text" name="data" id="data" class="form-control " maxlength="10" required>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-6 offset-md-3">
                     <label>PREÇO</label>
-                    <input type="text" name="valortotal" id="valortotal" class="form-control " required>
+                    <input type="text" name="valortotal" id="valortotal" class="vt form-control " value="" maxlength='12' required>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-6 offset-md-3">
-                    <label>CLIENTE
-                        <select name="cliente" id="cliente" required>
-                            <?php
-                            include_once("../Controller/VendaCon.php");
-                            $obj = new VendaCon();
-                            echo $obj->listaPessoasFK();
-                            ?>
-                        </select></label>
+                    <label>CLIENTE</label>
+                    <select name="cliente" id="cliente" required>
+                        <?php
+                        include_once("../Controller/VendaCon.php");
+                        $obj = new VendaCon();
+                        echo $obj->listaPessoasFK();
+                        ?>
+                    </select>
                 </div>
             </div>
 
@@ -135,8 +137,7 @@
                         include_once("../Controller/VendaCon.php");
                         $obj = new VendaCon();
                         echo $obj->listaUsuariosFK();
-                        ?>
-                    </select>
+                        ?></select>
                 </div>
             </div>
 
@@ -161,9 +162,10 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous">
     </script>
+    <script src="https://unpkg.com/imask"></script>
+
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/imask"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js" integrity="sha512-d4KkQohk+HswGs6A1d6Gak6Bb9rMWtxjOa0IiY49Q3TeFd5xAzjWXDCBW9RS7m86FQ4RzM2BdHmdJnnKRYknxw==" crossorigin="anonymous"></script>
     </div>
 
@@ -194,12 +196,37 @@
             });
         });
 
+        var momentMask = IMask(document.getElementById('data'), {
+            mask: Date,
+            pattern: 'DD/MM/YYYY',
+            lazy: true,
+            min: new Date(1990, 0, 1),
+            max: new Date(2021, 0, 1),
 
-        var maskData = IMask(document.getElementById('data'), {
-            mask: [{
-                mask: '00/00/0000',
+            format: function(date) {
+                return moment(date).format(pattern);
+            },
+            parse: function(str) {
+                return moment(str, pattern);
+            },
 
-            }]
+            blocks: {
+                YYYY: {
+                    mask: IMask.MaskedRange,
+                    from: 1990,
+                    to: 2021,
+                },
+                MM: {
+                    mask: IMask.MaskedRange,
+                    from: 1,
+                    to: 12,
+                },
+                DD: {
+                    mask: IMask.MaskedRange,
+                    from: 1,
+                    to: 31,
+                },
+            }
         });
     </script>
 

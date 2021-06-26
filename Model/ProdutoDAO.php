@@ -113,15 +113,15 @@ class ProdutoDAO
                 if (isset($registro["estoque"]))
                     $p->estoque = $registro["estoque"];
 
-                // Ao final, adiciona o registro como um item do array de retorno
+                
                 $items[] = $p;
             }
-            // Fecha a conexão
+            
             unset($this->p);
 
             return $items;
         }
-        // Em caso de erro, retorna a mensagem:
+        
         catch (PDOException $e) {
             echo "Erro: " . $e->getMessage();
         }
@@ -141,14 +141,14 @@ class ProdutoDAO
             else
                 $stmt = $this->p->query("SELECT * FROM produto");
 
-            // Fecha a conexão DAO
+            
             $this->p = null;
 
-            // Busca a próxima linha de um conjunto de resultados
+            
             while ($registro = $stmt->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
                 $p = new Produto();
 
-                // Sempre verifica se a query SQL retornou a respectiva coluna
+                
                 if (isset($registro["codproduto"]))
                     $p->codproduto = $registro["codproduto"];
                 if (isset($registro["descricao"]))
@@ -156,13 +156,13 @@ class ProdutoDAO
                 if (isset($registro["estoque"]))
                     $p->estoque = $registro["estoque"];
             
-                // Ao final, adiciona o registro como um item do array de retorno
+                
                 $items[] = $p;
             }
 
             return $items;
         }
-        // Em caso de erro, retorna a mensagem:
+        
         catch (PDOException $e) {
             echo "Erro: " . $e->getMessage();
         }

@@ -13,7 +13,7 @@ class VendaDAO {
   public function Inserir($venda)
   {
     try {
-      $stmt = $this->p->prepare("INSERT INTO venda (data, valortotal, codpessoa, codproduto, apelido) VALUES (?, ?, ?, ?, ?)");
+      $stmt = $this->p->prepare("INSERT INTO venda (data, valortotal, codpessoa, codproduto, codusuario) VALUES (?, ?, ?, ?, ?)");
 
       // Inicia a transação
       $this->p->beginTransaction();
@@ -30,7 +30,6 @@ class VendaDAO {
       // Grava a transação
       $this->p->commit();
 
-      print_r($stmt);
       // Fecha a conexão
       unset($this->p);
 
@@ -100,10 +99,11 @@ class VendaDAO {
       return false;
     }
   }
-  
+
 
   // consulta
-  public function Consultar($op, $param=null) {
+  public function Consultar($op, $param = null)
+  {
     try {
       $items = array();
 
@@ -111,8 +111,8 @@ class VendaDAO {
         case 1:
           $sql = "SELECT venda.codvenda, venda.data, venda.valortotal, pessoa.nome, produto.descricao, usuario.apelido
           FROM venda, pessoa, produto, usuario
-		      WHERE venda.codpessoa = pessoa.id AND venda.codproduto = produto.codproduto 
-		      AND venda.codusuario = usuario.id";
+          WHERE venda.codpessoa = pessoa.id AND venda.codproduto = produto.codproduto 
+          AND venda.codusuario = usuario.id";
           break;
         case 2:
           $sql = "SELECT * FROM venda WHERE codvenda = $param";  // volta só um registro
@@ -121,30 +121,36 @@ class VendaDAO {
 
       $stmt = $this->p->query($sql);
 
-      while ($registro = $stmt->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
+      while ($registro = $stmt->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)
+      ) {
         $p = new Venda();
 
         // Sempre verifica se a query SQL retornou a respectiva coluna
         if (isset($registro["codvenda"]))
-        $p->codvenda = $registro["codvenda"];
+          $p->codvenda = $registro["codvenda"];
         if (isset($registro["data"]))
-        $p->data = $registro["data"];
+          $p->data = $registro["data"];
         if (isset($registro["valortotal"]))
           $p->valortotal = $registro["valortotal"];
 
-        if ($op == 1) {
+        if ($op == 1
+        ) {
           if (isset($registro["nome"]))
             $p->codpessoa = $registro["nome"];
           if (isset($registro["descricao"]))
-          $p->codproduto = $registro["descricao"];
+            $p->codproduto = $registro["descricao"];
           if (isset($registro["apelido"]))
-          $p->id = $registro["apelido"];
+            $p->id = $registro["apelido"];
         } else {  // $op == 2
-          if (isset($registro["descricao"]))
-          $p->codproduto = $registro["descricao"];
+          if (isset($registro["codpessoa"]))
+            $p->codpessoa = $registro["codpessoa"];
+          if (isset($registro["codproduto"]))
+            $p->codproduto = $registro["codproduto"];
+          if (isset($registro["codusuario"]))
+            $p->id = $registro["codusuario"];
         }
 
-        
+        // Ao final, adiciona o registro como um item do array de retorno
         $items[] = $p;
       }
 
@@ -159,52 +165,4 @@ class VendaDAO {
     }
   }
 
-  public function ConsultarP($op, $param, $value)
-  {
-    $query = "";
-    try {
-      $items = array();
-
-      switch ($op) {
-        default:
-          $query = "SELECT * FROM venda WHERE $param = $value";
-      }
-
-      if ($query != null)
-        $stmt = $this->p->query($query);
-      else
-        $stmt = $this->p->query("SELECT * FROM venda");
-
-      // Fecha a conexão DAO
-      $this->p = null;
-
-      // Busca a próxima linha de um conjunto de resultados
-      while ($registro = $stmt->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
-        $p = new Venda();
-
-        // Sempre verifica se a query SQL retornou a respectiva coluna
-        if (isset($registro["codvenda"]))
-        $p->codvenda = $registro["codvenda"];
-        if (isset($registro["data"]))
-        $p->data = $registro["data"];
-        if (isset($registro["valortotal"]))
-        $p->valortotal = $registro["valortotal"];
-        if (isset($registro["nome"]))
-          $p->codpessoa = $registro["nome"];
-        if (isset($registro["descricao"]))
-        $p->codproduto = $registro["descricao"];
-        if (isset($registro["apelido"]))
-        $p->id = $registro["apelido"];
-
-        // Ao final, adiciona o registro como um item do array de retorno
-        $items[] = $p;
-      }
-
-      return $items;
-    }
-    // Em caso de erro, retorna a mensagem:
-    catch (PDOException $e) {
-      echo "Erro: " . $e->getMessage();
-    }
-  }
 }

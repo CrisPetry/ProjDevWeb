@@ -15,93 +15,93 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <style>
-    table {
-        border-radius: 12rem !important;
-    }
+        table {
+            border-radius: 12rem !important;
+        }
 
-    table,
-    td,
-    th {
-        border: 1px solid black;
-    }
+        table,
+        td,
+        th {
+            border: 1px solid black;
+        }
 
-    th {
-        text-align: center;
-        font-weight: bold;
-    }
+        th {
+            text-align: center;
+            font-weight: bold;
+        }
 
-    td {
-        width: 12rem;
-        text-align: center !important;
-    }
+        td {
+            width: 12rem;
+            text-align: center !important;
+        }
 
-    table {
-        margin: 0 auto;
-        border-collapse: collapse;
-    }
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
 
-    a {
-        text-decoration: none;
-    }
+        a {
+            text-decoration: none;
+        }
 
-    .navbar {
-        width: 100%;
-        background-color: lightblue !important;
-    }
+        .navbar {
+            width: 100%;
+            background-color: lightblue !important;
+        }
 
-    .content {
-        margin-top: 1rem;
-    }
+        .content {
+            margin-top: 1rem;
+        }
 
-    #idLogin {
-        font-family: 'Permanent Marker', cursive;
-        font-size: medium;
-        font-weight: 500;
-    }
+        #idLogin {
+            font-family: 'Permanent Marker', cursive;
+            font-size: medium;
+            font-weight: 500;
+        }
 
-    .dropdown {
-        position: relative;
-        display: inline-block;
-        cursor: pointer;
-    }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
 
-    .dropdown:hover .dropdown-content {
-        display: block;
-        cursor: pointer;
-    }
+        .dropdown:hover .dropdown-content {
+            display: block;
+            cursor: pointer;
+        }
 
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #f9f9f9;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        z-index: 1;
-    }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
 
-    body>div>div>div.content>table>tbody>tr>td>button {
-        border: none;
-        color: #000;
-        cursor: pointer;
-        font-size: large;
-        background-color: transparent;
-    }
+        body>div>div>div.content>table>tbody>tr>td>button {
+            border: none;
+            color: #000;
+            cursor: pointer;
+            font-size: large;
+            background-color: transparent;
+        }
 
-    body>div>div>div.content>table>tbody>tr>td>button:hover {
-        text-decoration: none;
-        background-color: transparent;
-        color: black;
-    }
+        body>div>div>div.content>table>tbody>tr>td>button:hover {
+            text-decoration: none;
+            background-color: transparent;
+            color: black;
+        }
 
-    .fa-edit fa {
-        align-content: right;
-    }
+        .fa-edit fa {
+            align-content: right;
+        }
 
-    .conteiner {
-        border: 0.1rem solid transparent;
-        text-align: center;
-        width: 100%;
-        margin: auto 0;
-    }
+        .conteiner {
+            border: 0.1rem solid transparent;
+            text-align: center;
+            width: 100%;
+            margin: auto 0;
+        }
     </style>
 </head>
 
@@ -148,36 +148,36 @@
         {
         ?>
 
-        <form id="formExcluir" name="formAlterar" method="post" action="deletaproduto.php">
+            <form id="formExcluir" name="formAlterar" method="post" action="deletaproduto.php">
 
-            <div class="form-group">
-                <div class="col-md-6 offset-md-3">
-                    <input type="hidden" name="selCod" id="selCod" value="<?php print $codproduto; ?>" readonly>
+                <div class="form-group">
+                    <div class="col-md-6 offset-md-3">
+                        <input type="hidden" name="selCod" id="selCod" value="<?php print $codproduto; ?>" readonly>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <div class="col-md-6 offset-md-3">
-                    <label>DESCRIÇÃO: </label>
-                    <input type="text" name="descricao" id="descricao" size="35" value="<?php print $descricao; ?>" readonly>
+                <div class="form-group">
+                    <div class="col-md-6 offset-md-3">
+                        <label>DESCRIÇÃO: </label>
+                        <input type="text" name="descricao" id="descricao" size="35" value="<?php print $descricao; ?>" readonly>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <div class="col-md-6 offset-md-3">
-                    <label>ESTOQUE: </label>
-                    <input type="text" name="estoque" id="estoque" size="35" value="<?php print $estoque; ?>" readonly>
+                <div class="form-group">
+                    <div class="col-md-6 offset-md-3">
+                        <label>ESTOQUE: </label>
+                        <input type="text" name="estoque" id="estoque" size="35" value="<?php print $estoque; ?>" readonly>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <div class="col-md-6 offset-md-3">
-                    <button type="submit" class="btn btn-danger" id="submeter">
-                        <i class="fa fa-trash"></i> Excluir</button>
-                    </a>
+                <div class="form-group">
+                    <div class="col-md-6 offset-md-3">
+                        <button type="submit" class="btn btn-danger" id="submeter">
+                            <i class="fa fa-trash"></i> Excluir</button>
+                        </a>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
         <?php
         }
         include_once("../Controller/ProdutoCon.php");
@@ -189,42 +189,39 @@
     </div>
 </body>
 
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
-    integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous">
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"
-    integrity="sha512-d4KkQohk+HswGs6A1d6Gak6Bb9rMWtxjOa0IiY49Q3TeFd5xAzjWXDCBW9RS7m86FQ4RzM2BdHmdJnnKRYknxw=="
-    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js" integrity="sha512-d4KkQohk+HswGs6A1d6Gak6Bb9rMWtxjOa0IiY49Q3TeFd5xAzjWXDCBW9RS7m86FQ4RzM2BdHmdJnnKRYknxw==" crossorigin="anonymous"></script>
 
 <script>
-document.querySelector('#formExcluir').addEventListener('submit', function(e) {
-    var form = this;
-    e.preventDefault();
-    Swal.fire({
-        title: "Excluir produto?",
-        icon: "danger",
-        showCancelButton: true,
-        showConfirmButton: true,
-        confirmButtonColor: "#218838",
-        cancelButtonColor: "#f94848",
-    }).then(function(isConfirm) {
-        if (isConfirm) {
-            Swal.fire({
-                title: 'Produto Excluído!',
-                icon: 'success',
-                showConfirmButton: true,
-                confirmButtonColor: "#218838",
-            }).then(function() {
-                form.submit();
-            });
-        };
+    document.querySelector('#formExcluir').addEventListener('submit', function(e) {
+        var form = this;
+        e.preventDefault();
+        Swal.fire({
+            title: "Excluir produto?",
+            icon: "danger",
+            showCancelButton: true,
+            showConfirmButton: true,
+            confirmButtonColor: "#218838",
+            cancelButtonColor: "#f94848",
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                Swal.fire({
+                    title: 'Produto Excluído!',
+                    icon: 'success',
+                    showConfirmButton: true,
+                    confirmButtonColor: "#218838",
+                }).then(function() {
+                    form.submit();
+                });
+            };
+        });
     });
-});
+
 </script>
 
 </html>

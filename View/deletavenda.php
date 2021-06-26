@@ -102,6 +102,10 @@
             width: 100%;
             margin: auto 0;
         }
+
+        input{
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -170,7 +174,7 @@
                     </div>
                 </div>
 
-                <!-- <div class="form-group"> 
+                <div class="form-group"> 
                     <div class="col-md-6 offset-md-3">
                         <label>CLIENTE: </label>
                         <input type="text" name="codpessoa" id="codpessoa" size="35" value="<?php print $cliente; ?>" readonly>
@@ -189,7 +193,7 @@
                         <label>VENDEDOR: </label>
                         <input type="text" name="id" id="id" value="<?php print $vendedor; ?>" readonly>
                     </div>
-                </div>-->
+                </div>
 
                 <div class="form-group">
                     <div class="col-md-6 offset-md-3">
