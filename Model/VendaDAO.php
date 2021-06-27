@@ -13,15 +13,16 @@ class VendaDAO {
   public function Inserir($venda)
   {
     try {
-      $stmt = $this->p->prepare("INSERT INTO venda (data, valortotal, codpessoa, codproduto, codusuario) VALUES (?, ?, ?, ?, ?)");
+      $stmt = $this->p->prepare("INSERT INTO venda (data, valortotal, qtd, codpessoa, idproduto, codusuario) VALUES (?, ?, ?, ?, ?,?)");
 
       // Inicia a transação
       $this->p->beginTransaction();
       $stmt->bindValue(1, $venda->data);
       $stmt->bindValue(2, $venda->valortotal);
-      $stmt->bindValue(3, $venda->codpessoa);
-      $stmt->bindValue(4, $venda->codproduto);
-      $stmt->bindValue(5, $venda->id);
+      $stmt->bindValue(3, $venda->qtd);
+      $stmt->bindValue(4, $venda->codpessoa);
+      $stmt->bindValue(5, $venda->codproduto);
+      $stmt->bindValue(6, $venda->id);
 
       
       // Executa a query
@@ -45,15 +46,16 @@ class VendaDAO {
   // alteração
   public function Alterar($venda) {
     try {
-      $stmt = $this->p->prepare("UPDATE venda SET data=?, valortotal=?, codpessoa=?, codproduto=?, id=? WHERE codvenda=?");
+      $stmt = $this->p->prepare("UPDATE venda SET data=?, valortotal=?, qtd=?, codpessoa=?, codproduto=?, id=? WHERE codvenda=?");
      
       $this->p->beginTransaction();
       $stmt->bindValue(1, $venda->data);
       $stmt->bindValue(2, $venda->valortotal);
-      $stmt->bindValue(3, $venda->codpessoa);
-      $stmt->bindValue(4, $venda->codproduto);
-      $stmt->bindValue(5, $venda->id);
-      $stmt->bindValue(6, $venda->codvenda);
+      $stmt->bindValue(3, $venda->qtd);
+      $stmt->bindValue(4, $venda->codpessoa);
+      $stmt->bindValue(5, $venda->codproduto);
+      $stmt->bindValue(6, $venda->id);
+      $stmt->bindValue(7, $venda->codvenda);
     
       // Executa a query
       $stmt->execute();
@@ -109,10 +111,10 @@ class VendaDAO {
 
       switch ($op) {
         case 1:
-          $sql = "SELECT venda.codvenda, venda.data, venda.valortotal, pessoa.nome, produto.descricao, usuario.apelido
+          $sql = "SELECT venda.codvenda, venda.data, venda.qtd, venda.valortotal, pessoa.nome, produto.descricao, usuario.apelido
           FROM venda, pessoa, produto, usuario
-          WHERE venda.codpessoa = pessoa.id AND venda.codproduto = produto.codproduto 
-          AND venda.codusuario = usuario.id";
+          WHERE venda.codpessoa = pessoa.id AND venda.idproduto = produto.codproduto 
+          AND venda.codusuario = usuario.id ORDER BY venda.codvenda asc";
           break;
         case 2:
           $sql = "SELECT * FROM venda WHERE codvenda = $param";  // volta só um registro
@@ -132,6 +134,8 @@ class VendaDAO {
           $p->data = $registro["data"];
         if (isset($registro["valortotal"]))
           $p->valortotal = $registro["valortotal"];
+        if (isset($registro["qtd"]))
+          $p->qtd = $registro["qtd"];
 
         if ($op == 1
         ) {
@@ -144,8 +148,8 @@ class VendaDAO {
         } else {  // $op == 2
           if (isset($registro["codpessoa"]))
             $p->codpessoa = $registro["codpessoa"];
-          if (isset($registro["codproduto"]))
-            $p->codproduto = $registro["codproduto"];
+          if (isset($registro["idproduto"]))
+            $p->codproduto = $registro["idproduto"];
           if (isset($registro["codusuario"]))
             $p->id = $registro["codusuario"];
         }

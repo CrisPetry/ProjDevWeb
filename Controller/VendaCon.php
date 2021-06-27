@@ -104,15 +104,16 @@ class VendaCon
       $codvenda    = $venda[0]->codvenda;
       $data        = $venda[0]->data;
       $valortotal  = $venda[0]->valortotal;
+      $qtd         = $venda[0]->qtd;
       $cliente     = $venda[0]->codpessoa;
       $produto     = $venda[0]->codproduto;
       $vendedor    = $venda[0]->id;
 
 
       if ($modo == 0)
-        chamaFormAlterar($codvenda, $data, $valortotal, $cliente, $produto, $vendedor);
+        chamaFormAlterar($codvenda, $data, $valortotal, $qtd, $cliente, $produto, $vendedor);
       else
-        chamaFormExcluir($codvenda, $data, $valortotal, $cliente, $produto, $vendedor);
+        chamaFormExcluir($codvenda, $data, $valortotal, $qtd, $cliente, $produto, $vendedor);
 
       print "<script>";
       print "document.formBuscar.buscaCod.value = '$codvenda';";
@@ -121,7 +122,7 @@ class VendaCon
       print "</script>";
     } else {
       print "<script>";
-      print "alert('PESSOA NÃO ENCONTRADA! Por favor, tente novamente...');";
+      print "alert('VENDA NÃO ENCONTRADA! Por favor, tente novamente...');";
       print "</script>";
     }
 
@@ -131,12 +132,14 @@ class VendaCon
   public function controlaInsercao()
   {
     if (
-      isset($_POST["data"]) && isset($_POST["valortotal"]) && isset($_POST["cliente"])
+      isset($_POST["data"]) && isset($_POST["valortotal"])
+      && isset($_POST["qtd"]) && isset($_POST["cliente"])
       && isset($_POST["produto"]) && isset($_POST["vendedor"])
     ) {
       $erros = array();
       $data = $_POST["data"];
       $valortotal = $_POST["valortotal"];
+      $qtd = $_POST["qtd"];
       $cliente = $_POST["cliente"];
       $produto = $_POST["produto"];
       $vendedor = $_POST["vendedor"];
@@ -146,6 +149,7 @@ class VendaCon
         $venda = new Venda();
         $venda->data = $data;
         $venda->valortotal  = $valortotal;
+        $venda->qtd = $qtd;
         $venda->codpessoa = $cliente;
         $venda->codproduto = $produto;
         $venda->id = $vendedor;
@@ -173,7 +177,7 @@ class VendaCon
   {
     $DAO = new VendaDAO();
     $lista = array();
-    $numCol = 6;
+    $numCol = 7;
 
     switch ($op) {
       case 1:
@@ -186,6 +190,7 @@ class VendaCon
         $codvenda = $lista[$i]->codvenda;
         $data = $lista[$i]->data;
         $valortotal  = $lista[$i]->valortotal;
+        $qtd = $lista[$i]->qtd;
         $cliente   = $lista[$i]->codpessoa;
         $produto = $lista[$i]->codproduto;
         $vendedor = $lista[$i]->id;
@@ -198,6 +203,8 @@ class VendaCon
           echo "<td style=\"text-align: left;\">$data</td>";
         if ($valortotal)
           echo "<td style=\"text-align: left;\">$valortotal</td>";
+        if ($qtd)
+          echo "<td style=\"text-align: left;\">$qtd</td>";
         if ($cliente)
           echo "<td style=\"text-align: left;\">$cliente</td>";
         if ($produto)
@@ -217,13 +224,15 @@ class VendaCon
   public function controlaAlteracao()
   {
     if (
-      isset($_POST["data"]) && isset($_POST["valortotal"]) && isset($_POST["cliente"])
+      isset($_POST["data"]) && isset($_POST["valortotal"])
+      && isset($_POST["qtd"]) && isset($_POST["cliente"])
       && isset($_POST["produto"]) && isset($_POST["vendedor"]) && isset($_POST["selCod"])
     ) {
       $erros = array();
       $data = $_POST["data"];
       $valortotal = $_POST["valortotal"];
       $cliente = $_POST["cliente"];
+      $qtd = $_POST["qtd"];
       $produto = $_POST["produto"];
       $vendedor = $_POST["vendedor"];
       $codvenda = $_POST["selCod"];
@@ -234,6 +243,7 @@ class VendaCon
         $venda = new Venda();
         $venda->data = $data;
         $venda->valortotal  = $valortotal;
+        $venda->qtd = $qtd;
         $venda->codpessoa = $cliente;
         $venda->codproduto = $produto;
         $venda->id = $vendedor;
@@ -269,7 +279,7 @@ class VendaCon
       $venda->codvenda = $codvenda;
 
       if ($DAO->Excluir($venda)) {
-        $res = "VENDA EXCLUÍDO COM SUCESSO!";
+  
       } else {
         $erros[] = "ERRO NO BANCO DE DADOS: $DAO->erro";
         $err = serialize($erros);

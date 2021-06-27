@@ -14,89 +14,93 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<style>
-    table {
-        border-radius: 12rem !important;
-    }
+    <style>
+        table {
+            border-radius: 12rem !important;
+        }
 
-    table,
-    td,
-    th {
-        border: 1px solid black;
-    }
+        table,
+        td,
+        th {
+            border: 1px solid black;
+        }
 
-    th {
-        text-align: center;
-        font-weight: bold;
-    }
+        th {
+            text-align: center;
+            font-weight: bold;
+        }
 
-    td {
-        width: 12rem;
-        text-align: center !important;
-    }
+        td {
+            width: 12rem;
+            text-align: center !important;
+        }
 
-    table {
-        margin: 0 auto;
-        border-collapse: collapse;
-    }
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
 
-    a {
-        text-decoration: none;
-    }
+        a {
+            text-decoration: none;
+        }
 
-    .navbar {
-        width: 100%;
-        background-color: lightblue !important;
-    }
+        .navbar {
+            width: 100%;
+            background-color: lightblue !important;
+        }
 
-    .content {
-        margin-top: 1rem;
-    }
+        .content {
+            margin-top: 1rem;
+        }
 
-    #idLogin {
-        font-family: 'Permanent Marker', cursive;
-        font-size: medium;
-        font-weight: 500;
-    }
+        #idLogin {
+            font-family: 'Permanent Marker', cursive;
+            font-size: medium;
+            font-weight: 500;
+        }
 
-    .dropdown {
-        position: relative;
-        display: inline-block;
-        cursor: pointer;
-    }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
 
-    .dropdown:hover .dropdown-content {
-        display: block;
-        cursor: pointer;
-    }
+        .dropdown:hover .dropdown-content {
+            display: block;
+            cursor: pointer;
+        }
 
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #000;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        z-index: 1;
-    }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #000;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
 
-    .fa-edit fa {
-        align-content: right;
-    }
+        .fa-edit fa {
+            align-content: right;
+        }
 
-    .content>table>tbody>tr>td>button {
-        border: none;
-        color: #000;
-        cursor: pointer;
-        font-size: large;
-        background-color: transparent;
-    }
+        .content>table>tbody>tr>td>button {
+            border: none;
+            color: #000;
+            cursor: pointer;
+            font-size: large;
+            background-color: transparent;
+        }
 
-    .card {
-        padding-bottom: 2rem;
-    }
+        .card {
+            padding-bottom: 2rem;
+        }
 
-    .rTable {
-        margin-bottom: 1rem;
-    }
+        .rTable {
+            margin-bottom: 1rem;
+        }
+
+        .rTable tr td:nth-child(4) {
+            width: 10%;
+        }
     </style>
 </head>
 
@@ -134,6 +138,7 @@
                                 <th>Código</th>
                                 <th>Data</th>
                                 <th>Preço R$</th>
+                                <th>Quantidade</th>
                                 <th>Cliente</th>
                                 <th>Produto</th>
                                 <th>Vendedor</th>
@@ -164,28 +169,24 @@
     </div>
     </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
-        integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous">
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"
-        integrity="sha512-d4KkQohk+HswGs6A1d6Gak6Bb9rMWtxjOa0IiY49Q3TeFd5xAzjWXDCBW9RS7m86FQ4RzM2BdHmdJnnKRYknxw=="
-        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js" integrity="sha512-d4KkQohk+HswGs6A1d6Gak6Bb9rMWtxjOa0IiY49Q3TeFd5xAzjWXDCBW9RS7m86FQ4RzM2BdHmdJnnKRYknxw==" crossorigin="anonymous"></script>
     </div>
 
     <script>
-    $('.add').click(function() {
-        window.location.href = 'inserevenda.php';
-    })
+        $('.add').click(function() {
+            window.location.href = 'inserevenda.php';
+        })
     </script>
 
     <script>
-    $('.delete').click(function() {
-        window.location.href = 'deletavenda.php';
-    })
+        $('.delete').click(function() {
+            window.location.href = 'deletavenda.php';
+        })
     </script>
 </body>
 

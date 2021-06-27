@@ -4,6 +4,7 @@ class Venda {
   private $codvenda;
   private $data;
   private $valortotal;
+  private $qtd;
   private $codpessoa;
   private $codproduto;
   private $codusuario;

@@ -103,7 +103,7 @@
             margin: auto 0;
         }
 
-        input{
+        input {
             text-align: center;
         }
     </style>
@@ -148,7 +148,7 @@
             </div>
         </form>
         <?php
-        function chamaFormExcluir($codvenda, $data, $valortotal, $cliente, $produto, $vendedor)
+        function chamaFormExcluir($codvenda, $data, $valortotal, $qtd, $cliente, $produto, $vendedor)
         {
         ?>
 
@@ -174,7 +174,14 @@
                     </div>
                 </div>
 
-                <div class="form-group"> 
+                <div class="form-group">
+                    <div class="col-md-6 offset-md-3">
+                        <label>QUANTIDADE: </label>
+                        <input type="text" name="qtd" id="qtd" value="<?php print $qtd; ?>" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <div class="col-md-6 offset-md-3">
                         <label>CLIENTE: </label>
                         <input type="text" name="codpessoa" id="codpessoa" size="35" value="<?php print $cliente; ?>" readonly>
@@ -227,7 +234,7 @@
         var form = this;
         e.preventDefault();
         Swal.fire({
-            title: "Excluir pessoa?",
+            title: "Excluir venda?",
             icon: "danger",
             showCancelButton: true,
             showConfirmButton: true,
@@ -236,7 +243,7 @@
         }).then(function(isConfirm) {
             if (isConfirm) {
                 Swal.fire({
-                    title: 'Pessoa Excluída!',
+                    title: 'Venda Excluída!',
                     icon: 'success',
                     showConfirmButton: true,
                     confirmButtonColor: "#218838",

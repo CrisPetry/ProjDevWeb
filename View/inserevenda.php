@@ -103,6 +103,14 @@
                 </div>
             </div>
 
+
+            <div class="form-group">
+                <div class="col-md-6 offset-md-3">
+                    <label>QUANTIDADE</label>
+                    <input type="text" name="qtd" id="qtd" class="vt form-control " required>
+                </div>
+            </div>
+
             <div class="form-group">
                 <div class="col-md-6 offset-md-3">
                     <label>CLIENTE</label>
