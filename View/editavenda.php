@@ -5,16 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Deletar Vendas</title>
+    <title>Editar Vendas</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../CSS/estilopessoa.css">
+    <link rel="stylesheet" href="../CSS/estiloproduto.css">
     <link rel="icon" type="imagem/png" href="../Imagens/logo.png" />
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <style>
+<style>
         table {
             border-radius: 12rem !important;
         }
@@ -132,9 +132,9 @@
 
     <div class="conteiner">
         <div class="form-group">
-            <h3 style="text-align: center;">EXCLUIR VENDA</h3>
+            <h3 style="text-align: center;">EDITAR VENDA</h3>
         </div>
-        <form id="formBuscar" name="formBuscar" method="post" action="deletavenda.php">
+        <form id="formBuscar" name="formBuscar" method="post" action="editavenda.php">
 
             <div class="form-group">
                 <div class="   col-md-6 offset-md-3">
@@ -148,11 +148,11 @@
             </div>
         </form>
         <?php
-        function chamaFormExcluir($codvenda, $data, $valortotal, $qtd, $cliente, $produto, $vendedor)
+        function chamaFormAlterar($codvenda, $data, $valortotal, $qtd, $codpessoa, $codproduto, $id)
         {
         ?>
 
-            <form id="formExcluir" name="formExcluir" method="post" action="deletavenda.php">
+            <form id="formAlterar" name="formAlterar" method="post" action="editavenda.php">
 
                 <div class="form-group">
                     <div class="col-md-6 offset-md-3">
@@ -163,58 +163,73 @@
                 <div class="form-group">
                     <div class="col-md-6 offset-md-3">
                         <label>DATA: </label>
-                        <input type="text" name="data" id="data" size="21" value="<?php print $data; ?>" readonly>
+                        <input type="text" name="data" id="data" size="10" value="<?php print $data; ?>">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-md-6 offset-md-3">
                         <label>PREÇO: </label>
-                        <input type="text" name="valortotal" id="valortotal" value="<?php print $valortotal; ?>" readonly>
+                        <input type="text" name="valortotal" id="valortotal" size="8" value="<?php print $valortotal; ?>">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-md-6 offset-md-3">
                         <label>QUANTIDADE: </label>
-                        <input type="text" name="qtd" id="qtd" size="12" value="<?php print $qtd; ?>" readonly>
+                        <input type="text" name="qtd" id="qtd" size="5" value="<?php print $qtd; ?>" readonly>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-md-6 offset-md-3">
                         <label>CLIENTE: </label>
-                        <input type="text" name="codpessoa" id="codpessoa" size="12" value="<?php print $cliente; ?>" readonly>
+                        <select name="cliente" id="cliente" required>
+                            <?php
+                            include_once("../Controller/VendaCon.php");
+                            $obj = new VendaCon();
+                            echo $obj->listaPessoasFK($codpessoa);
+                            ?>
+                        </select>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="col-md-6 offset-md-3">
-                        <label>PRODUTO: </label>
-                        <input type="text" name="codproduto" id="codproduto" size="12" value="<?php print $produto; ?>" readonly>
-                    </div>
-                </div>
+                    <div class="form-group">
+                        <div class="col-md-6 offset-md-3">
+                            <label>PRODUTO: </label>
+                            <select name="produto" id="produto" required>
+                                <?php
+                                include_once("../Controller/VendaCon.php");
+                                $obj = new VendaCon();
+                                echo $obj->listaProdutosFK($codproduto);
+                                ?>
+                            </select>
+                        </div>
 
-                <div class="form-group">
-                    <div class="col-md-6 offset-md-3">
-                        <label>VENDEDOR: </label>
-                        <input type="text" name="id" id="id" size="12" value="<?php print $vendedor; ?>" readonly>
-                    </div>
-                </div>
+                        <div class="form-group">
+                            <div class="col-md-6 offset-md-3">
+                                <label>VENDEDOR: </label>
+                                <select name="vendedor" id="vendedor" required>
+                                    <?php
+                                    include_once("../Controller/VendaCon.php");
+                                    $obj = new VendaCon();
+                                    echo $obj->listaUsuariosFK($id);
+                                    ?>
+                                </select>
+                            </div><br>
 
-                <div class="form-group">
-                    <div class="col-md-6 offset-md-3">
-                        <button type="submit" class="btn btn-danger" id="submeter">
-                            <i class="fa fa-trash"></i> Excluir</button>
-                        </a>
-                    </div>
-                </div>
+                            <div class="form-group">
+                                <div class="col-md-6 offset-md-3">
+                                    <button type="submit" class="btn btn-warning" id="submeter">
+                                        <i class="fa fa-edit"></i> Editar</button>
+                                    </a>
+                                </div>
+                            </div>
             </form>
         <?php
         }
         include_once("../Controller/VendaCon.php");
         $obj = new VendaCon();
-        $obj->controlaExclusao();
+        $obj->controlaAlteracao();
         ?>
         <a href="../View/listavenda.php">
             <button type="button" class="btn btn-info"><i class="fa fa-arrow-left"> Voltar</i></button>
@@ -229,13 +244,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js" integrity="sha512-d4KkQohk+HswGs6A1d6Gak6Bb9rMWtxjOa0IiY49Q3TeFd5xAzjWXDCBW9RS7m86FQ4RzM2BdHmdJnnKRYknxw==" crossorigin="anonymous"></script>
 
+
 <script>
-    document.querySelector('#formExcluir').addEventListener('submit', function(e) {
+    document.querySelector('#formAlterar').addEventListener('submit', function(e) {
         var form = this;
         e.preventDefault();
         Swal.fire({
-            title: "Excluir venda?",
-            icon: "danger",
+            title: "Editar venda?",
+            icon: "info",
             showCancelButton: true,
             showConfirmButton: true,
             confirmButtonColor: "#218838",
@@ -243,7 +259,7 @@
         }).then(function(isConfirm) {
             if (isConfirm) {
                 Swal.fire({
-                    title: 'Venda Excluída!',
+                    title: 'Venda Editada!',
                     icon: 'success',
                     showConfirmButton: true,
                     confirmButtonColor: "#218838",
@@ -252,6 +268,39 @@
                 });
             };
         });
+    });
+
+    var momentMask = IMask(document.getElementById('data'), {
+        mask: Date,
+        pattern: 'DD/MM/YYYY',
+        lazy: true,
+        min: new Date(1990, 0, 1),
+        max: new Date(2021, 0, 1),
+
+        format: function(date) {
+            return moment(date).format(pattern);
+        },
+        parse: function(str) {
+            return moment(str, pattern);
+        },
+
+        blocks: {
+            YYYY: {
+                mask: IMask.MaskedRange,
+                from: 1990,
+                to: 2021,
+            },
+            MM: {
+                mask: IMask.MaskedRange,
+                from: 1,
+                to: 12,
+            },
+            DD: {
+                mask: IMask.MaskedRange,
+                from: 1,
+                to: 31,
+            },
+        }
     });
 </script>
 

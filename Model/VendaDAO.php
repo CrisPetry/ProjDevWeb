@@ -42,12 +42,14 @@ class VendaDAO {
       return false;
     }
   }
-  
+
   // alteração
-  public function Alterar($venda) {
+  public function Alterar($venda)
+  {
     try {
-      $stmt = $this->p->prepare("UPDATE venda SET data=?, valortotal=?, qtd=?, codpessoa=?, codproduto=?, id=? WHERE codvenda=?");
-     
+      $stmt = $this->p->prepare("UPDATE venda SET data=?, valortotal=?, qtd=?, codpessoa=?, idproduto=?, codusuario=? WHERE codvenda=?");
+
+      // Inicia a transação
       $this->p->beginTransaction();
       $stmt->bindValue(1, $venda->data);
       $stmt->bindValue(2, $venda->valortotal);
@@ -56,25 +58,25 @@ class VendaDAO {
       $stmt->bindValue(5, $venda->codproduto);
       $stmt->bindValue(6, $venda->id);
       $stmt->bindValue(7, $venda->codvenda);
-    
+
+
       // Executa a query
       $stmt->execute();
-  
+
       // Grava a transação
       $this->p->commit();
-    
+
       // Fecha a conexão
       unset($this->p);
 
       return true;
     }
     // Em caso de erro, retorna a mensagem:
-    catch(PDOException $e) {
+    catch (PDOException $e) {
       $this->erro = "Erro: " . $e->getMessage();
-    return false;
+      return false;
     }
   }
-
   // exclusão
   public function Excluir($venda) {
     try {
@@ -122,6 +124,7 @@ class VendaDAO {
       }
 
       $stmt = $this->p->query($sql);
+      
 
       while ($registro = $stmt->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)
       ) {

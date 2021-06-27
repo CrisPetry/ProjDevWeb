@@ -118,14 +118,14 @@ class VendaCon
       print "<script>";
       print "document.formBuscar.buscaCod.value = '$codvenda';";
       print "document.formBuscar.buscaCod.disabled = true;";
-      print "document.formBuscar.button2.disabled  = true;";
+      print "document.formBuscar.buttonbuscar.disabled  = true;";
       print "</script>";
     } else {
       print "<script>";
       print "alert('VENDA NÃO ENCONTRADA! Por favor, tente novamente...');";
       print "</script>";
-    }
 
+    }
     unset($venda);
   }
 
@@ -223,20 +223,16 @@ class VendaCon
 
   public function controlaAlteracao()
   {
-    if (
-      isset($_POST["data"]) && isset($_POST["valortotal"])
-      && isset($_POST["qtd"]) && isset($_POST["cliente"])
-      && isset($_POST["produto"]) && isset($_POST["vendedor"]) && isset($_POST["selCod"])
-    ) {
+    if (isset($_POST["data"]) && isset($_POST["valortotal"]) && isset($_POST["qtd"])
+      && isset($_POST["cliente"]) && isset($_POST["produto"]) && isset($_POST["vendedor"]) && isset($_POST["selCod"])) {
       $erros = array();
       $data = $_POST["data"];
       $valortotal = $_POST["valortotal"];
-      $cliente = $_POST["cliente"];
       $qtd = $_POST["qtd"];
+      $cliente = $_POST["cliente"];
       $produto = $_POST["produto"];
       $vendedor = $_POST["vendedor"];
       $codvenda = $_POST["selCod"];
-
 
       if (count($erros) == 0) {
         $DAO = new VendaDAO();
@@ -250,22 +246,21 @@ class VendaCon
         $venda->codvenda = $codvenda;
 
         if ($DAO->Alterar($venda)) {
-          $res = "VENDA ALTERADA COM SUCESSO!";
-          header("Location: ../view/alteravenda.php?resultMode=$res");
+        
         } else {
           $erros[] = "ERRO NO BANCO DE DADOS: $DAO->erro";
           $err = serialize($erros);
-          header("Location: ../view/alteravenda.php?errorMode=$err&codvenda=$codvenda");
+          header("Location: ../View/editavenda.php?errorMode=$err&codvenda=$codvenda");
         }
-
         unset($venda);
+
       } else {
         $err = serialize($erros);  // Caso tenha erro no preenchimento do formulário
-        header("Location: ../view/alteravenda.php?errorMode=$err&codvenda=$codvenda");
+        header("Location: ../View/editavenda.php?errorMode=$err&codvenda=$codvenda");
       }
     } else if (isset($_POST["buscaCod"])) {
-      $codvenda = $_POST["buscaCod"];
-      $this->buscaDados($codvenda, 0);  // chamaFormAlterar
+      $codigo = $_POST["buscaCod"];
+      $this->buscaDados($codigo, 0);  // chamaFormAlterar
     }
   }
 
