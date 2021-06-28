@@ -16,47 +16,47 @@
 
 
     <style>
-        a {
-            text-decoration: none;
-        }
+    a {
+        text-decoration: none;
+    }
 
-        .navbar {
-            width: 100%;
-            background-color: lightblue !important;
-        }
+    .navbar {
+        width: 100%;
+        background-color: lightblue !important;
+    }
 
-        .content {
-            margin-top: 1rem;
-        }
+    .content {
+        margin-top: 1rem;
+    }
 
-        #idLogin {
-            font-family: 'Permanent Marker', cursive;
-            font-size: medium;
-            font-weight: 500;
-        }
+    #idLogin {
+        font-family: 'Permanent Marker', cursive;
+        font-size: medium;
+        font-weight: 500;
+    }
 
-        .dropdown {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-        }
+    .dropdown {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+    }
 
-        .dropdown:hover .dropdown-content {
-            display: block;
-            cursor: pointer;
-        }
+    .dropdown:hover .dropdown-content {
+        display: block;
+        cursor: pointer;
+    }
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-        }
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
 
-        .fa-edit fa {
-            align-content: right;
-        }
+    .fa-edit fa {
+        align-content: right;
+    }
     </style>
 </head>
 
@@ -99,7 +99,8 @@
             <div class="form-group">
                 <div class="col-md-6 offset-md-3">
                     <label>PREÇO</label>
-                    <input type="text" name="valortotal" id="valortotal" class="vt form-control " value="" maxlength='12' required>
+                    <input type="text" name="valortotal" id="valortotal" class="vt form-control " value=""
+                        maxlength='12' required>
                 </div>
             </div>
 
@@ -166,76 +167,80 @@
     ?>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+        integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous">
     </script>
     <script src="https://unpkg.com/imask"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js" integrity="sha512-d4KkQohk+HswGs6A1d6Gak6Bb9rMWtxjOa0IiY49Q3TeFd5xAzjWXDCBW9RS7m86FQ4RzM2BdHmdJnnKRYknxw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"
+        integrity="sha512-d4KkQohk+HswGs6A1d6Gak6Bb9rMWtxjOa0IiY49Q3TeFd5xAzjWXDCBW9RS7m86FQ4RzM2BdHmdJnnKRYknxw=="
+        crossorigin="anonymous"></script>
     </div>
 
 
 
     <script>
-        document.querySelector('#formInserirVenda').addEventListener('submit', function(e) {
-            var form = this;
-            e.preventDefault();
-            Swal.fire({
-                title: "Adicionar venda?",
-                icon: "info",
-                showCancelButton: true,
-                showConfirmButton: true,
-                confirmButtonColor: "#218838",
-                cancelButtonColor: "#f94848",
-            }).then(function(isConfirm) {
-                if (isConfirm) {
-                    Swal.fire({
-                        title: 'Venda Adicionada!',
-                        icon: 'success',
-                        showConfirmButton: true,
-                        confirmButtonColor: "#218838",
-                    }).then(function() {
-                        form.submit();
-                    });
-                };
-            });
+    document.querySelector('#formInserirVenda').addEventListener('submit', function(e) {
+        var form = this;
+        e.preventDefault();
+        Swal.fire({
+            title: "Adicionar venda?",
+            icon: "info",
+            showCancelButton: true,
+            showConfirmButton: true,
+            confirmButtonColor: "#218838",
+            cancelButtonColor: "#f94848",
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                Swal.fire({
+                    title: 'Venda Adicionada!',
+                    icon: 'success',
+                    showConfirmButton: true,
+                    confirmButtonColor: "#218838",
+                }).then(function() {
+                    form.submit();
+                });
+            };
         });
+    });
 
-        var momentMask = IMask(document.getElementById('data'), {
-            mask: Date,
-            pattern: 'DD/MM/YYYY',
-            lazy: true,
-            min: new Date(1990, 0, 1),
-            max: new Date(2021, 0, 1),
+    var momentMask = IMask(document.getElementById('data'), {
+        mask: Date,
+        pattern: 'DD/MM/YYYY',
+        lazy: true,
+        min: new Date(1990, 0, 1),
+        max: new Date(2021, 0, 1),
 
-            format: function(date) {
-                return moment(date).format(pattern);
+        format: function(date) {
+            return moment(date).format(pattern);
+        },
+        parse: function(str) {
+            return moment(str, pattern);
+        },
+
+        blocks: {
+            YYYY: {
+                mask: IMask.MaskedRange,
+                from: 1990,
+                to: 2021,
             },
-            parse: function(str) {
-                return moment(str, pattern);
+            MM: {
+                mask: IMask.MaskedRange,
+                from: 1,
+                to: 12,
             },
-
-            blocks: {
-                YYYY: {
-                    mask: IMask.MaskedRange,
-                    from: 1990,
-                    to: 2021,
-                },
-                MM: {
-                    mask: IMask.MaskedRange,
-                    from: 1,
-                    to: 12,
-                },
-                DD: {
-                    mask: IMask.MaskedRange,
-                    from: 1,
-                    to: 31,
-                },
-            }
-        });
+            DD: {
+                mask: IMask.MaskedRange,
+                from: 1,
+                to: 31,
+            },
+        }
+    });
     </script>
 
 </body>
