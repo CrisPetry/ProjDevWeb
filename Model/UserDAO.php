@@ -85,7 +85,7 @@ class UserDAO {
       if ($query != null)
         $stmt = $this->p->query($query);
       else
-        $stmt = $this->p->query("SELECT * FROM usuario");
+        $stmt = $this->p->query("SELECT * FROM usuario ORDER BY id asc");
 
       while ($registro = $stmt->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
         $p = new User();

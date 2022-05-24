@@ -101,7 +101,7 @@ class ProdutoDAO
             if ($query != null)
                 $stmt = $this->p->query($query);
             else
-                $stmt = $this->p->query("SELECT * FROM produto");
+                $stmt = $this->p->query("SELECT * FROM produto ORDER BY codproduto asc");
 
             while ($registro = $stmt->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
                 $p = new Produto();
